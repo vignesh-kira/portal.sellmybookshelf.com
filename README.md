@@ -1,3 +1,3 @@
-# ui.bookbazaar.com
+# portal.bookbazaar.com
 
-## UI for the BookBazaar app
+## UI Portal for SellMyBookShelf app
