@@ -6,6 +6,7 @@
     "eslint": "^5.14.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
+    "font-awesome": "^4.7.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.1",
