@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 import "../../assets/styles/common.css";
 
 class Login extends Component {
+	handleFormSubmit = () => {
+		alert('hello');
+		debugger;
+	};
 	render() {
+		const segmentSchema = yup.object().shape({
+			email: yup.string().email('Invalid email address').required('Email is required'),
+			password: yup.string().required('Password is required')
+		});
 		return (
 			<div className="bg-gradient-primary container-with-no-padding">
 				<div className="container">
@@ -17,28 +27,54 @@ class Login extends Component {
 												<div className="text-center">
 													<h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
 												</div>
-												<form className="user">
-													<div className="form-group">
-														<input type="email" className="form-control form-control-user"
-														       id="exampleInputEmail" aria-describedby="emailHelp"
-														       placeholder="Enter Email Address..." />
-													</div>
-													<div className="form-group">
-														<input type="password" className="form-control form-control-user"
-														       id="exampleInputPassword" placeholder="Password" />
-													</div>
-													<div className="form-group">
-														<div className="custom-control custom-checkbox small">
-															<input type="checkbox" className="custom-control-input"
-															       id="customCheck" />
-															<label className="custom-control-label"
-															       htmlFor="customCheck">Remember Me</label>
-														</div>
-													</div>
-													<a href="index.html" className="btn btn-primary btn-user btn-block">
-														Login
-													</a>
-												</form>
+												<Formik
+													initialValues={{ email: '', password: '' }}
+													validationSchema={segmentSchema}
+													onSubmit={this.handleFormSubmit}
+												>
+													{({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (
+														<form className="user" onSubmit={handleSubmit}>
+															<div className="form-group text-left">
+																<label>Email:</label>
+																<input type="email"
+																       className={`form-control ${errors.email && touched.email && 'is-invalid'}`}
+																       name="email"
+																       id="email"
+																       onChange={handleChange}
+																       onBlur={handleBlur}
+																       value={values.email}
+																/>
+																{errors.email && touched.email && <div className="invalid-feedback">{errors.email}</div>}
+															</div>
+															<div className="form-group text-left">
+																<label>Password:</label>
+																<input type="password"
+																       className={`form-control ${errors.password && touched.password && 'is-invalid'}`}
+																       id="password"
+																       onChange={handleChange}
+																       onBlur={handleBlur}
+																       value={values.password}
+																/>
+																{errors.password && touched.password && <div className="invalid-feedback">{errors.password}</div>}
+															</div>
+															<div className="form-group">
+																<div className="custom-control custom-checkbox small">
+																	<input type="checkbox" className="custom-control-input"
+																	       id="customCheck" />
+																	<label className="custom-control-label"
+																	       htmlFor="customCheck">Remember Me</label>
+																</div>
+															</div>
+															<button
+																type="submit"
+																className="btn btn-primary btn-user btn-block"
+																onClick={handleSubmit}
+															>
+																Login
+															</button>
+														</form>
+													)}
+												</Formik>
 												<hr />
 												<div className="text-center">
 													<a className="small" href="/forgotpassword">
