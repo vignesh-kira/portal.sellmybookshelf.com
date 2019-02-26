@@ -1,9 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware  } from 'redux';
+import createSagaMiddleware from "redux-saga";
+
+import rootReducer from './reducers';
+import rootSaga from './sagas/sagas';
+
 import './index.css';
 import "font-awesome/css/font-awesome.min.css";
 import "./assets/styles/sb-admin-2.css";
-
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// create the saga middleware
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(
+	rootReducer,
+	applyMiddleware(sagaMiddleware)
+);
+
+// run the saga
+ sagaMiddleware.run(rootSaga);
+
+ReactDOM.render(
+	<Provider store={store}>
+		<App />
+	</Provider>,
+	document.getElementById('root')
+);

@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import "../../assets/styles/common.css";
+import { fetchUser } from '../../actions/login';
 
 class Login extends Component {
+	componentDidMount() {
+		this.props.fetchUser();
+	}
 	handleFormSubmit = () => {
 		alert('hello');
 		debugger;
 	};
 	render() {
+		const { userFetchStatus } = this.props.user;
 		const segmentSchema = yup.object().shape({
 			email: yup.string().email('Invalid email address').required('Email is required'),
 			password: yup.string().required('Password is required')
@@ -96,4 +102,12 @@ class Login extends Component {
 	}
 }
 
-export default Login;
+const mapStateToProps = state => ({
+	user: state.login
+});
+
+const mapDispatchToProps = {
+	fetchUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

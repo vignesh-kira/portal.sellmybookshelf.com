@@ -1,6 +1,7 @@
 {
   "name": "portal.sellmybookshelf.com",
   "version": "0.1.0",
+  "main": "dist/index.js",
   "private": true,
   "dependencies": {
     "eslint": "5.12.0",
@@ -8,8 +9,10 @@
     "eslint-plugin-import": "^2.16.0",
     "font-awesome": "^4.7.0",
     "formik": "^1.5.1",
+    "isomorphic-fetch": "^2.2.1",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
+    "query-string": "^6.2.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-redux": "^6.0.0",
@@ -18,6 +21,7 @@
     "redux": "^4.0.1",
     "redux-actions": "^2.6.4",
     "redux-form": "^8.1.0",
+    "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.1",
     "styled-components": "^4.1.3",
     "yup": "^0.26.10"
