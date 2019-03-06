@@ -4,14 +4,14 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import "../../assets/styles/common.css";
 import { fetchUser } from '../../actions/login';
+import md5 from 'md5';
 
 class Login extends Component {
-	componentDidMount() {
-		this.props.fetchUser();
-	}
-	handleFormSubmit = () => {
-		alert('hello');
-		debugger;
+	handleFormSubmit = (entity) => {
+		entity = Object.assign(entity, {
+			password: md5(entity.password)
+		});
+		this.props.fetchUser(entity);
 	};
 	render() {
 		const { userFetchStatus } = this.props.user;
