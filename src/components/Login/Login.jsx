@@ -15,6 +15,9 @@ class Login extends Component {
 	};
 	render() {
 		const { userFetchStatus } = this.props.user;
+		if(userFetchStatus){
+			window.location.href = "/register";
+		}
 		const segmentSchema = yup.object().shape({
 			email: yup.string().email('Invalid email address').required('Email is required'),
 			password: yup.string().required('Password is required')
