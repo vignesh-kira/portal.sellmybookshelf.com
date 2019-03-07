@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
+import {connect} from "react-redux";
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import {fetchClasses,fetchSections} from "../../actions/login";
+import md5 from 'md5';
 
 class Register extends Component {
+	componentDidMount() {
+		this.props.fetchClasses();
+		this.props.fetchSections();
+	}
+
 	render() {
+		const { classes, sections } = this.props;
+
 		return (
 			<div className="bg-gradient-primary container-with-no-padding">
 				<div className="container">
@@ -18,31 +30,81 @@ class Register extends Component {
 												</div>
 												<form className="user">
 													<div className="form-group row">
-														<div className="col-sm-6 mb-3 mb-sm-0">
-															<input type="text" className="form-control form-control-user"
-															       id="exampleFirstName" placeholder="First Name" />
+														<div className="col-sm-6 mb-3 mb-sm-0 text-left">
+															<label>Firstname:</label>
+															<input type="text"
+															       className="form-control"
+															       id="firstname"
+															       name="firstname"
+															/>
 														</div>
-														<div className="col-sm-6">
-															<input type="text" className="form-control form-control-user"
-															       id="exampleLastName" placeholder="Last Name" />
+														<div className="col-sm-6 text-left">
+															<label>Lastname:</label>
+															<input type="text"
+															       className="form-control"
+															       id="lastname"
+															       name="lastname"
+															/>
 														</div>
-													</div>
-													<div className="form-group">
-														<input type="email" className="form-control form-control-user"
-														       id="exampleInputEmail" placeholder="Email Address" />
 													</div>
 													<div className="form-group row">
-														<div className="col-sm-6 mb-3 mb-sm-0">
-															<input type="password" className="form-control form-control-user"
-															       id="exampleInputPassword" placeholder="Password" />
+														<div className="col-sm-6 mb-3 mb-sm-0 text-left">
+															<label>Class:</label>
+															<select
+																className="form-control"
+																id="class"
+																name="class"
+															>
+																{classes.map(classInfo => (
+																	<option key={classInfo.id} value={classInfo.id}>
+																		{classInfo.name}
+																	</option>
+																))}
+															</select>
 														</div>
-														<div className="col-sm-6">
-															<input type="password" className="form-control form-control-user"
-															       id="exampleRepeatPassword" placeholder="Repeat Password" />
+														<div className="col-sm-6 text-left">
+															<label>Section:</label>
+															<select
+																className="form-control"
+																id="section"
+																name="section"
+															>
+																{sections.map(section => (
+																	<option key={section.id} value={section.id}>
+																		{section.name}
+																	</option>
+																))}
+															</select>
+														</div>
+													</div>
+													<div className="form-group text-left">
+														<label>Email:</label>
+														<input type="email"
+														       className="form-control"
+														       id="email"
+														       name="email"
+														/>
+													</div>
+													<div className="form-group row">
+														<div className="col-sm-6 mb-3 mb-sm-0 text-left">
+															<label>Password:</label>
+															<input type="password"
+															       className="form-control"
+															       id="password"
+															       name="password"
+															/>
+														</div>
+														<div className="col-sm-6 text-left">
+															<label>Confirm Password:</label>
+															<input type="password"
+															       className="form-control"
+															       id="confirmpassword"
+															       name="confirmpassword"
+															/>
 														</div>
 													</div>
 													<a href="#" className="btn btn-primary btn-user btn-block">
-														Register Account
+														Register
 													</a>
 												</form>
 												<hr />
@@ -65,4 +127,14 @@ class Register extends Component {
 	}
 }
 
-export default Register;
+const mapStateToProps = state => ({
+	classes: state.login.classes,
+	sections: state.login.sections
+});
+
+const mapDispatchToProps = {
+	fetchClasses,
+	fetchSections
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

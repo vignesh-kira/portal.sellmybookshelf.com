@@ -42,7 +42,7 @@ class Login extends Component {
 													onSubmit={this.handleFormSubmit}
 												>
 													{({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (
-														<form className="user" onSubmit={handleSubmit}>
+														<form className="user" onSubmit={handleSubmit} >
 															<div className="form-group text-left">
 																<label>Email:</label>
 																<input type="email"
@@ -68,8 +68,10 @@ class Login extends Component {
 															</div>
 															<div className="form-group">
 																<div className="custom-control custom-checkbox small">
-																	<input type="checkbox" className="custom-control-input"
-																	       id="customCheck" />
+																	<input type="checkbox"
+																	       className="custom-control-input"
+																	       id="customCheck"
+																	/>
 																	<label className="custom-control-label"
 																	       htmlFor="customCheck">Remember Me</label>
 																</div>
