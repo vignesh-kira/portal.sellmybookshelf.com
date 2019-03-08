@@ -20,3 +20,11 @@ export function fetchSections() {
 		method: 'GET'
 	});
 }
+
+export function registerUser(entity) {
+	return fetchJson(`${BASE_URL}/users/register`, {
+		method: 'POST',
+		entity: entity.payload
+	});
+}
+

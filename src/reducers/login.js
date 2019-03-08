@@ -8,7 +8,10 @@ import {
 	FETCH_CLASSES_ERROR,
 	FETCH_SECTIONS,
 	FETCH_SECTIONS_SUCCESS,
-	FETCH_SECTIONS_ERROR
+	FETCH_SECTIONS_ERROR,
+	REGISTER_USER,
+	REGISTER_USER_SUCCESS,
+	REGISTER_USER_ERROR
 } from '../constants/action-types';
 import {
 	API_SUCCESS,
@@ -54,12 +57,25 @@ export default handleActions({
 	[FETCH_SECTIONS_ERROR]: (state) => ({
 		...state,
 		sectionsFetchStatus: API_ERROR,
-	})
+	}),
+	[REGISTER_USER]: (state) => ({
+		...state,
+		registerUserStatus: ''
+	}),
+	[REGISTER_USER_SUCCESS]: (state) => ({
+		...state,
+		registerUserStatus: API_SUCCESS
+	}),
+	[REGISTER_USER_ERROR]: (state) => ({
+		...state,
+		registerUserStatus: API_ERROR,
+	}),
 }, {
 	user: {},
 	userFetchStatus: '',
 	classes:[],
 	classesFetchStatus: '',
 	sections: [],
-	sectionsFetchStatus: ''
+	sectionsFetchStatus: '',
+	registerUserStatus: ''
 });

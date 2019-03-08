@@ -12,3 +12,7 @@ export const fetchClassesError = createAction(actions.FETCH_CLASSES_ERROR);
 export const fetchSections = createAction(actions.FETCH_SECTIONS);
 export const fetchSectionsSuccess = createAction(actions.FETCH_SECTIONS_SUCCESS);
 export const fetchSectionsError = createAction(actions.FETCH_SECTIONS_ERROR);
+
+export const registerUser = createAction(actions.REGISTER_USER);
+export const registerUserSuccess = createAction(actions.REGISTER_USER_SUCCESS);
+export const registerUserError = createAction(actions.REGISTER_USER_ERROR);

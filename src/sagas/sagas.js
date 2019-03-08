@@ -2,7 +2,8 @@ import { call, put, takeEvery } from 'redux-saga/effects'
 import {
 	fetchUser,
 	fetchClasses,
-	fetchSections
+	fetchSections,
+	registerUser
 } from '../apis/login';
 import {
 	fetchUserSuccess,
@@ -10,12 +11,15 @@ import {
 	fetchClassesSuccess,
 	fetchClassesError,
 	fetchSectionsSuccess,
-	fetchSectionsError
+	fetchSectionsError,
+	registerUserSuccess,
+	registerUserError
 } from '../actions/login';
 import {
 	FETCH_CLASSES,
 	FETCH_SECTIONS,
-	FETCH_USER
+	FETCH_USER,
+	REGISTER_USER
 } from '../constants/action-types';
 
 export function* fetchUserSaga(payload) {
@@ -58,6 +62,20 @@ export function* fetchSectionsSaga(payload) {
 		yield put(fetchSectionsError());
 	}
 }
+
+export function* registerUserSaga(payload) {
+	try {
+		const result = yield call(registerUser, payload);
+		if(!result.error){
+			yield put(registerUserSuccess());
+		}else{
+			yield put(registerUserError());
+		}
+
+	} catch (e) {
+		yield put(registerUserError());
+	}
+}
 /*
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
   Allows concurrent fetches of user.
@@ -66,6 +84,7 @@ function* mySaga() {
 	yield takeEvery(FETCH_USER, fetchUserSaga);
 	yield takeEvery(FETCH_CLASSES, fetchClassesSaga);
 	yield takeEvery(FETCH_SECTIONS, fetchSectionsSaga);
+	yield takeEvery(REGISTER_USER, registerUserSaga);
 }
 
 
