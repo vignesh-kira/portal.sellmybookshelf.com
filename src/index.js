@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware  } from 'redux';
 import createSagaMiddleware from "redux-saga";
+import { CookiesProvider } from 'react-cookie';
 
 import rootReducer from './reducers';
 import rootSaga from './sagas/sagas';
@@ -21,11 +22,13 @@ const store = createStore(
 );
 
 // run the saga
- sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
-	<Provider store={store}>
-		<App />
-	</Provider>,
+	<CookiesProvider>
+		<Provider store={store}>
+			<App />
+		</Provider>
+	</CookiesProvider>,
 	document.getElementById('root')
 );
