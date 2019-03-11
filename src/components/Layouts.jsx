@@ -4,7 +4,7 @@ import { withCookies } from 'react-cookie';
 import Login from './Login/Login';
 import Register from './Register/Register';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
-import Dashboard from "./Authorized/Dashboard";
+import Dashboard from "./Authorized/Dashboard/Dashboard";
 
 const Layouts = (props) => (
 	<Router>
