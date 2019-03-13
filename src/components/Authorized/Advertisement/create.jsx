@@ -1,12 +1,100 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell, faUserCircle } from '@fortawesome/free-solid-svg-icons'
-import SideNav  from '../common/SideNav'
+import { faLaughWink, faTachometerAlt, faBell, faUserCircle, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 
 const MainDashboard = (props) => (
 	<div id="wrapper">
 		{/* Sidebar */}
-		<SideNav />
+		<ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+			{/* Sidebar - Brand */}
+			<a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+				<div className="sidebar-brand-icon rotate-n-15">
+					<FontAwesomeIcon icon={faLaughWink} size="2x"/>
+				</div>
+				<div className="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+			</a>
+
+			{/* Divider */}
+			<hr className="sidebar-divider my-0" />
+
+			{/* Nav Item - Dashboard */}
+			<li className="nav-item active">
+				<a className="nav-link" href="index.html">
+					<i>
+						<FontAwesomeIcon icon={faTachometerAlt} />
+					</i>
+					<span>Dashboard</span></a>
+			</li>
+
+			{/* Divider */}
+			<hr className="sidebar-divider" />
+
+			{/* Heading */}
+			<div className="sidebar-heading">
+				Interface
+			</div>
+
+			{/* Nav Item - Pages Collapse Menu */}
+			<li className="nav-item">
+				<a className="nav-link" href="#">
+					<i className="fa fa-cog"></i>
+					<span>Components</span>
+				</a>
+				{/*<div id="collapseTwo" className="collapse" aria-labelledby="headingTwo"*/}
+				{/*data-parent="#accordionSidebar">*/}
+				{/*<div className="bg-white py-2 collapse-inner rounded">*/}
+				{/*<h6 className="collapse-header">Custom Components:</h6>*/}
+				{/*<a className="collapse-item" href="buttons.html">Buttons</a>*/}
+				{/*<a className="collapse-item" href="cards.html">Cards</a>*/}
+				{/*</div>*/}
+				{/*</div>*/}
+			</li>
+
+			{/* Nav Item - Utilities Collapse Menu */}
+			<li className="nav-item">
+				<a className="nav-link" href="#">
+					<i className="fa fa-fw fa-wrench"></i>
+					<span>Utilities</span>
+				</a>
+			</li>
+
+			{/* Divider */}
+			<hr className="sidebar-divider" />
+
+			{/* Heading */}
+			<div className="sidebar-heading">
+				Addons
+			</div>
+
+			{/* Nav Item - Pages Collapse Menu */}
+			<li className="nav-item">
+				<a className="nav-link" href="#" >
+					<i className="fa fa-fw fa-folder"></i>
+					<span>Pages</span>
+				</a>
+			</li>
+
+			{/* Nav Item - Tables */}
+			<li className="nav-item">
+				<a className="nav-link" href="tables.html">
+					<i className="fa fa-fw fa-table"></i>
+					<span>Tables</span></a>
+			</li>
+
+			{/* Divider */}
+			<hr className="sidebar-divider d-none d-md-block" />
+
+			{/* Sidebar Toggler (Sidebar) */}
+			{/*<div className="text-center d-none d-md-inline">*/}
+			{/*<button className="border-0" id="sidebarToggle">*/}
+			{/*<i>*/}
+			{/*<FontAwesomeIcon icon={faAngleLeft} />*/}
+			{/*</i>*/}
+			{/*</button>*/}
+			{/*</div>*/}
+
+		</ul>
 		{/* End of Sidebar */}
 
 		{/* Content Wrapper */}
