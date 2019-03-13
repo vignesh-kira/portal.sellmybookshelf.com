@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import md5 from 'md5';
+import {Link} from "react-router-dom";
 import "../../assets/styles/common.css";
 import { fetchUser } from '../../actions/login';
 
@@ -95,11 +96,11 @@ class Login extends Component {
 												</Formik>
 												<hr />
 												<div className="text-center">
-													<a className="small" href="/forgotpassword">
-														Forgot Password?</a>
+													<Link className="small" to="/forgotpassword">
+														Forgot Password?</Link>
 												</div>
 												<div className="text-center">
-													<a className="small" href="/register">Register</a>
+													<Link className="small" to="/register">Register</Link>
 												</div>
 											</div>
 										</div>

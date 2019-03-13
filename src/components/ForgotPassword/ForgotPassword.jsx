@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 
 class ForgotPassword extends Component {
 	render() {
@@ -15,27 +16,40 @@ class ForgotPassword extends Component {
 											<div className="p-5">
 												<div className="text-center">
 													<h1 className="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
-													<p className="mb-4">We get it, stuff happens. Just enter your email
-														address below and we'll send you a link to reset your
-														password!</p>
+													<p className="mb-4 text-justify">
+														We get it, stuff happens.
+														Please do either of the following to reset your password:
+													</p>
+													<p>
+														<ol className="text-left">
+															<li>
+																Call or leave a  message to <a href="tel:+918880926101"><b>(+91)8880926101</b></a> and we will contact you soon.
+															</li>
+															<b>Or</b>
+															<li>
+																Just email to <a href="mailto:admin@sellmybookshelf.com"><b>admin@sellmybookshelf.com</b></a> and we'll send
+																you instruction on how to reset password!
+															</li>
+														</ol>
+													</p>
 												</div>
-												<form className="user">
-													<div className="form-group">
-														<input type="email" className="form-control form-control-user"
-														       id="exampleInputEmail" aria-describedby="emailHelp"
-														       placeholder="Enter Email Address..." />
-													</div>
-													<a href="#" className="btn btn-primary btn-user btn-block">
-														Reset Password
-													</a>
-												</form>
+												{/*<form className="user">*/}
+												{/*<div className="form-group">*/}
+												{/*<input type="email" className="form-control form-control-user"*/}
+												{/*id="exampleInputEmail" aria-describedby="emailHelp"*/}
+												{/*placeholder="Enter Email Address..." />*/}
+												{/*</div>*/}
+												{/*<a href="#" className="btn btn-primary btn-user btn-block">*/}
+												{/*Reset Password*/}
+												{/*</a>*/}
+												{/*</form>*/}
 												<hr />
 												<div className="text-center">
-													<a className="small" href="/register">Create an Account!</a>
+													<Link className="small" to="/register">Create an Account!</Link>
 												</div>
 												<div className="text-center">
-													<a className="small" href="/login">Already have an account?
-														Login!</a>
+													<Link className="small" to="/login">Already have an account?
+														Login!</Link>
 												</div>
 											</div>
 										</div>

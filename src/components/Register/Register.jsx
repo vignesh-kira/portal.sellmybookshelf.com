@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import {connect} from "react-redux";
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import md5 from 'md5';
+import {Link} from "react-router-dom";
 import {
 	fetchClasses,
 	fetchSections,
 	registerUser
 } from "../../actions/login";
-import md5 from 'md5';
+
 
 class Register extends Component {
 	componentDidMount() {
@@ -189,10 +191,10 @@ class Register extends Component {
 												</Formik>
 												<hr />
 												<div className="text-center">
-													<a className="small" href="/forgotpassword">Forgot Password?</a>
+													<Link className="small" to="/forgotpassword">Forgot Password?</Link>
 												</div>
 												<div className="text-center">
-													<a className="small" href="/login">Already have an account? Login!</a>
+													<Link className="small" to="/login">Already have an account? Login!</Link>
 												</div>
 											</div>
 										</div>
