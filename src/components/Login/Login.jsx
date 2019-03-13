@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import md5 from 'md5';
-import {Link} from "react-router-dom";
+import {Link , Redirect} from "react-router-dom";
 import "../../assets/styles/common.css";
 import { fetchUser } from '../../actions/login';
 
@@ -24,7 +24,7 @@ class Login extends Component {
 				firstname: user.firstname
 			};
 			cookies.set('user', userCookie);
-			window.location.href = "/dashboard";
+			return (<Redirect to={{pathname: "/dashboard"}}/>)
 		}
 		const segmentSchema = yup.object().shape({
 			email: yup.string().email('Invalid email address').required('Email is required'),
