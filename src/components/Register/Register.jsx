@@ -14,8 +14,6 @@ class Register extends Component {
 		this.props.fetchClasses();
 		this.props.fetchSections();
 	}
-	componentDidUpdate() {
-	}
 
 	handleFormSubmit = (entity) => {
 		delete entity.confirmpassword;
@@ -26,7 +24,7 @@ class Register extends Component {
 
 	render() {
 		const { classes, sections, cookies } = this.props;
-		cookies.set('name', 'Vignesh');
+		// cookies.set('name', 'Vignesh');
 		const segmentSchema = yup.object().shape({
 			firstname: yup.string().required('First name is required'),
 			lastname: yup.string().required('Last name is required'),

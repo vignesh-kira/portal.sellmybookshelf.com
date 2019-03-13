@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import md5 from 'md5';
 import "../../assets/styles/common.css";
 import { fetchUser } from '../../actions/login';
-import md5 from 'md5';
+
 
 class Login extends Component {
 	handleFormSubmit = (entity) => {
@@ -14,9 +15,15 @@ class Login extends Component {
 		this.props.fetchUser(entity);
 	};
 	render() {
-		const { userFetchStatus } = this.props.user;
+		const { login, cookies } = this.props;
+		const { userFetchStatus, user } = login;
 		if(userFetchStatus){
-			window.location.href = "/register";
+			const userCookie = {
+				id: user.id,
+				firstname: user.firstname
+			};
+			cookies.set('user', userCookie);
+			window.location.href = "/dashboard";
 		}
 		const segmentSchema = yup.object().shape({
 			email: yup.string().email('Invalid email address').required('Email is required'),
@@ -107,8 +114,9 @@ class Login extends Component {
 	}
 }
 
-const mapStateToProps = state => ({
-	user: state.login
+const mapStateToProps = (state, ownProps) => ({
+	login: state.login,
+	cookies: ownProps.cookies
 });
 
 const mapDispatchToProps = {
