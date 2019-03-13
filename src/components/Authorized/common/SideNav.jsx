@@ -18,7 +18,7 @@ const SideNav = () => (
 
 		{/* Nav Item - Dashboard */}
 		<li className="nav-item active">
-			<a className="nav-link" href="#">
+			<a className="nav-link" href="/dashboard">
 				<i>
 					<FontAwesomeIcon icon={faTachometerAlt} />
 				</i>
@@ -34,7 +34,7 @@ const SideNav = () => (
 		</div>
 
 		<li className="nav-item">
-			<a className="nav-link" href="#">
+			<a className="nav-link" href="/advertisement/list">
 				<i>
 					<FontAwesomeIcon icon={faListOl} />
 				</i>
@@ -42,7 +42,7 @@ const SideNav = () => (
 			</a>
 		</li>
 		<li className="nav-item">
-			<a className="nav-link" href="#">
+			<a className="nav-link" href="/advertisement/create">
 				<i>
 					<FontAwesomeIcon icon={faPlusCircle} />
 				</i>
@@ -50,7 +50,7 @@ const SideNav = () => (
 			</a>
 		</li>
 		<li className="nav-item">
-			<a className="nav-link" href="#">
+			<a className="nav-link" href="/advertisement/edit">
 				<i>
 					<FontAwesomeIcon icon={faEdit} />
 				</i>
@@ -68,7 +68,7 @@ const SideNav = () => (
 
 		{/* Nav Item - Pages Collapse Menu */}
 		<li className="nav-item">
-			<a className="nav-link" href="#" >
+			<a className="nav-link" href="/settings/profile" >
 				<i>
 					<FontAwesomeIcon icon={faTools} />
 				</i>

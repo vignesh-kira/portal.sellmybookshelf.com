@@ -1,4 +1,5 @@
 IMPORTANT: Router fix
+IMPORTANT: Select appropriate nav item
 Fix sagas
 ScrollToTop
 FullFIll Theme

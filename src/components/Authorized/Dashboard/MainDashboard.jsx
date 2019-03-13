@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
+import PageTitle  from '../common/PageTitle'
+import Footer  from '../common/Footer'
 
 const MainDashboard = (props) => (
 	<div id="wrapper">
@@ -24,9 +26,7 @@ const MainDashboard = (props) => (
 				<div className="container-fluid">
 
 					{/* Page Heading */}
-					<div className="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-					</div>
+					<PageTitle title="Dashboard" />
 
 					{/* Content Row */}
 					<div className="row">
@@ -159,22 +159,13 @@ const MainDashboard = (props) => (
 
 						</div>
 					</div>
-
-
 				</div>
 				{/* /.container-fluid */}
-
 			</div>
 			{/* End of Main Content */}
 
 			{/* Footer */}
-			<footer className="sticky-footer bg-white">
-				<div className="container my-auto">
-					<div className="copyright text-center my-auto">
-						<span>Copyright &copy; SellMyBookShelf.com 2019</span>
-					</div>
-				</div>
-			</footer>
+			Footer
 			{/* End of Footer */}
 
 		</div>

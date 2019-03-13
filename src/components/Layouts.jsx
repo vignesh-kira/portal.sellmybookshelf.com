@@ -5,6 +5,11 @@ import Login from './Login/Login';
 import Register from './Register/Register';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
 import Dashboard from "./Authorized/Dashboard/Dashboard";
+import CreateAdvertisement from "./Authorized/Advertisement/CreateAdvertisement";
+import NotFound from "./Authorized/NotFound";
+import ListAdvertisement from "./Authorized/Advertisement/ListAdvertisement";
+import EditAdvertisement from "./Authorized/Advertisement/EditAdvertisement";
+import Profile from "./Authorized/Settings/Profile";
 
 const Layouts = (props) => (
 	<Router>
@@ -19,6 +24,11 @@ const Layouts = (props) => (
 			/>
 			<Route path="/forgotpassword" component={ForgotPassword} />
 			<Route path="/dashboard" component={Dashboard} />
+			<Route path="/advertisement/list" component={ListAdvertisement} />
+			<Route path="/advertisement/create" component={CreateAdvertisement} />
+			<Route path="/advertisement/edit" component={EditAdvertisement} />
+			<Route path="/settings/profile" component={Profile} />
+			<Route path="/notfound" component={NotFound} />
 		</div>
 	</Router>
 );
