@@ -1,12 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { withCookies } from 'react-cookie';
 import Login from './Login/Login';
 import Register from './Register/Register';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
 import Dashboard from "./Authorized/Dashboard/Dashboard";
 import CreateAdvertisement from "./Authorized/Advertisement/CreateAdvertisement";
-import NotFound from "./Authorized/NotFound";
+import AuthorizedNotFound from "./Authorized/NotFound";
+import UnAuthorizedNotFound from "./UnAuthorized/NotFound";
 import ListAdvertisement from "./Authorized/Advertisement/ListAdvertisement";
 import EditAdvertisement from "./Authorized/Advertisement/EditAdvertisement";
 import Profile from "./Authorized/Settings/Profile";
@@ -16,7 +17,7 @@ const Layouts = (props) => {
 
 	return (
 		<Router>
-			<div>
+			<Switch>
 				<Route exact path="/"
 				       render={() => (<Login cookies={props.cookies}/>)}
 				/>
@@ -40,17 +41,17 @@ const Layouts = (props) => {
 								<Route path="/advertisement/create" component={CreateAdvertisement} />
 								<Route path="/advertisement/edit" component={EditAdvertisement} />
 								<Route path="/settings/profile" component={Profile} />
-								<Route path="/notfound" component={NotFound} />
+								<Route component={AuthorizedNotFound} />
 							</React.Fragment>
 						)
 						: (
 							<React.Fragment>
-								<Route path="/notfound" component={NotFound} />
+								<Route component={UnAuthorizedNotFound} />
 							</React.Fragment>
 						)
 				}
 
-			</div>
+			</Switch>
 		</Router>
 	)
 };

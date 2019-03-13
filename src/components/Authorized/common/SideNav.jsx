@@ -1,7 +1,8 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLaughWink, faTachometerAlt, faSignOutAlt, faTools, faListOl, faPlusCircle, faEdit } from '@fortawesome/free-solid-svg-icons'
 import {withCookies} from "react-cookie";
+import {Link} from "react-router-dom";
 
 const SideNav = (props) => {
 	const { cookies } = props;
@@ -22,11 +23,11 @@ const SideNav = (props) => {
 
 			{/* Nav Item - Dashboard */}
 			<li className="nav-item active">
-				<a className="nav-link" href="/dashboard">
+				<Link className="nav-link" to="/dashboard">
 					<i>
 						<FontAwesomeIcon icon={faTachometerAlt} />
 					</i>
-					<span>Dashboard</span></a>
+					<span>Dashboard</span></Link>
 			</li>
 
 			{/* Divider */}
@@ -38,28 +39,28 @@ const SideNav = (props) => {
 			</div>
 
 			<li className="nav-item">
-				<a className="nav-link" href="/advertisement/list">
+				<Link className="nav-link" to="/advertisement/list">
 					<i>
 						<FontAwesomeIcon icon={faListOl} />
 					</i>
 					<span>List</span>
-				</a>
+				</Link>
 			</li>
 			<li className="nav-item">
-				<a className="nav-link" href="/advertisement/create">
+				<Link className="nav-link" to="/advertisement/create">
 					<i>
 						<FontAwesomeIcon icon={faPlusCircle} />
 					</i>
 					<span>Create</span>
-				</a>
+				</Link>
 			</li>
 			<li className="nav-item">
-				<a className="nav-link" href="/advertisement/edit">
+				<Link className="nav-link" to="/advertisement/edit">
 					<i>
 						<FontAwesomeIcon icon={faEdit} />
 					</i>
 					<span>Edit</span>
-				</a>
+				</Link>
 			</li>
 
 			{/* Divider */}
@@ -72,12 +73,12 @@ const SideNav = (props) => {
 
 			{/* Nav Item - Pages Collapse Menu */}
 			<li className="nav-item">
-				<a className="nav-link" href="/settings/profile" >
+				<Link className="nav-link" to="/settings/profile" >
 					<i>
 						<FontAwesomeIcon icon={faTools} />
 					</i>
 					<span>Profile</span>
-				</a>
+				</Link>
 			</li>
 
 			{/* Nav Item - Tables */}
@@ -86,7 +87,8 @@ const SideNav = (props) => {
 					<i>
 						<FontAwesomeIcon icon={faSignOutAlt} />
 					</i>
-					<span>Logout</span></a>
+					<span>Logout</span>
+				</a>
 			</li>
 
 			{/* Divider */}

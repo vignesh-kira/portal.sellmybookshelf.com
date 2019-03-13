@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'
-import Footer  from '../common/Footer'
+import Footer  from '../../Shared/Footer'
 
 class EditAdvertisement extends Component {
 	render() {

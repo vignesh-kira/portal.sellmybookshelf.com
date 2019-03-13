@@ -4,7 +4,7 @@ import { faBell, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'
-import Footer  from '../common/Footer'
+import Footer  from '../../Shared/Footer'
 
 const MainDashboard = (props) => (
 	<div id="wrapper">

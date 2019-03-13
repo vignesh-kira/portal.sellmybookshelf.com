@@ -1,4 +1,4 @@
-IMPORTANT: Router fix
+IMPORTANT: Router fix Switch and Redirect
 IMPORTANT: Select appropriate nav item
 Fix sagas
 ScrollToTop
