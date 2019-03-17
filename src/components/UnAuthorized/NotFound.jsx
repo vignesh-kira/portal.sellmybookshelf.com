@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import Footer  from '../Shared/Footer'
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class NotFound extends Component {
+
 	render() {
 		return (
 			<div id="wrapper">

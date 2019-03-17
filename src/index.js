@@ -5,6 +5,7 @@ import { createStore, applyMiddleware  } from 'redux';
 import createSagaMiddleware from "redux-saga";
 import { CookiesProvider } from 'react-cookie';
 import "font-awesome/css/font-awesome.min.css";
+import { BrowserRouter } from 'react-router-dom';
 
 import rootReducer from './reducers';
 import rootSaga from './sagas/sagas';
@@ -27,7 +28,9 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
 	<CookiesProvider>
 		<Provider store={store}>
-			<App />
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
 		</Provider>
 	</CookiesProvider>,
 	document.getElementById('root')

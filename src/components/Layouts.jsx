@@ -1,58 +1,68 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { withCookies } from 'react-cookie';
+
 import Login from './Login/Login';
 import Register from './Register/Register';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
+
 import Dashboard from "./Authorized/Dashboard/Dashboard";
-import CreateAdvertisement from "./Authorized/Advertisement/CreateAdvertisement";
+import AdvertisementWrapper from "./Authorized/Advertisement/AdvertisementWrapper";
+import SettingsWrapper from "./Authorized/Settings/SettingsWrapper";
 import AuthorizedNotFound from "./Authorized/NotFound";
+
 import UnAuthorizedNotFound from "./UnAuthorized/NotFound";
-import ListAdvertisement from "./Authorized/Advertisement/ListAdvertisement";
-import EditAdvertisement from "./Authorized/Advertisement/EditAdvertisement";
-import Profile from "./Authorized/Settings/Profile";
 
 const Layouts = (props) => {
 	const userCookie = props.cookies.get('user');
-
 	return (
-		<Router>
-			<Switch>
-				<Route exact path="/"
-				       render={() => (<Login cookies={props.cookies}/>)}
-				/>
-				<Route path="/login"
-				       render={() => (<Login cookies={props.cookies}/>)}
-				/>
-				<Route
-					path="/register"
-					render={() => (<Register cookies={props.cookies}/>)}
-				/>
-				<Route path="/forgotpassword" component={ForgotPassword} />
+		<Switch>
+			<Route
+				exact
+				path="/"
+				render={() => (<Login cookies={props.cookies}/>)}
+			/>
+			<Route
+				path="/login"
+				render={() => (<Login cookies={props.cookies}/>)}
+			/>
+			<Route
+				path="/register"
+				render={() => (<Register cookies={props.cookies}/>)}
+			/>
+			<Route
+				path="/forgotpassword"
+				render={() => (<ForgotPassword cookies={props.cookies}/>)}
+			/>
 
-				{
-					userCookie
-						? (
-							<React.Fragment>
-								<Route path="/dashboard"
-								       render={() => (<Dashboard cookies={props.cookies}/>)}
-								/>
-								<Route path="/advertisement/list" component={ListAdvertisement} />
-								<Route path="/advertisement/create" component={CreateAdvertisement} />
-								<Route path="/advertisement/edit" component={EditAdvertisement} />
-								<Route path="/settings/profile" component={Profile} />
-								<Route component={AuthorizedNotFound} />
-							</React.Fragment>
-						)
-						: (
-							<React.Fragment>
-								<Route component={UnAuthorizedNotFound} />
-							</React.Fragment>
-						)
-				}
+			{
+				userCookie
+					?  (
+						<>
+							<Route
+								path="/dashboard"
+								render={() => (<Dashboard cookies={props.cookies}/>)}
+							/>
+							<Route
+								path="/advertisement"
+								render={() => (<AdvertisementWrapper cookies={props.cookies}/>)}
+							/>
+							<Route
+								path="/settings"
+								render={() => (<SettingsWrapper cookies={props.cookies}/>)}
+							/>
+							<Route
+								component={AuthorizedNotFound}
+							/>
+						</>
+					)
+					:
+					<Route
+						component={UnAuthorizedNotFound}
+					/>
+			}
 
-			</Switch>
-		</Router>
+		</Switch>
 	)
 };
 
