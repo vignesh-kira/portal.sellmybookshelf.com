@@ -12,6 +12,7 @@ import rootSaga from './sagas/sagas';
 
 import './index.css';
 import "./assets/styles/sb-admin-2.css";
+import 'bootstrap/dist/css/bootstrap.css';
 import App from './App';
 
 // create the saga middleware

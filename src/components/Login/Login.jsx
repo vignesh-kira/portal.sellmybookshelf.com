@@ -18,6 +18,13 @@ class Login extends Component {
 	render() {
 		const { login, cookies } = this.props;
 		const { userFetchStatus, user } = login;
+		const userCookie = cookies.get('user');
+
+		// Always delete null cookies
+		if(userCookie && userCookie === "null"){
+			cookies.remove('user');
+		}
+
 		if(userFetchStatus){
 			const userCookie = {
 				id: user.id,
