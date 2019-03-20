@@ -32,7 +32,7 @@ export function registerUser({payload}) {
 
 	return fetchJson(`${BASE_URL}/users/register`, {
 		method: 'POST',
-		entity: payload
+		entity: registrationFields
 	});
 }
 
