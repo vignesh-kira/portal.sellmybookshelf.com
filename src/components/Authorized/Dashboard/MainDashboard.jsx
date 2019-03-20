@@ -120,20 +120,14 @@ const MainDashboard = (props) => (
 							{/* Color System */}
 							<div className="row">
 								<div className="col-lg-6 mb-4">
-									<div className="card bg-danger text-white shadow">
-										<div className="card-body">
-											Danger
-											<div className="text-white-50 small">#e74a3b</div>
-										</div>
-									</div>
+									<a href="#" className="btn btn-danger btn-lg btn-icon-split" style={{padding: '20px 100px'}}>
+										<span className="text">Buy A Book</span>
+									</a>
 								</div>
 								<div className="col-lg-6 mb-4">
-									<div className="card bg-success text-white shadow">
-										<div className="card-body">
-											Success
-											<div className="text-white-50 small">#1cc88a</div>
-										</div>
-									</div>
+									<a href="#" className="btn btn-success btn-lg btn-icon-split" style={{padding: '20px 100px'}}>
+										<span className="text">Sell A Book</span>
+									</a>
 								</div>
 							</div>
 
