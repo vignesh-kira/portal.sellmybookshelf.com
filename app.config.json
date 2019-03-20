@@ -1,0 +1,9 @@
+{
+  "apps" : [
+    {
+      "name"      : "portal.sellmybookshelf.com",
+      "script"    : "serve -s build",
+      "interpreter": "none"
+    }
+  ]
+}
