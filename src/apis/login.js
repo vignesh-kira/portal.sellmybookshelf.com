@@ -1,7 +1,7 @@
 import fetchJson from '../custom-lib/fetch-json';
 import md5 from "md5";
 
-const BASE_URL = 'http://localhost:6000';
+const BASE_URL = 'http://api.sellmybookshelf.com/';
 
 export function fetchUser(entity) {
 	return fetchJson(`${BASE_URL}/users/login`, {
