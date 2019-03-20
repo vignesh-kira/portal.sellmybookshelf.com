@@ -15,7 +15,6 @@ class TopNav extends Component {
 	}
 
 	toggle = () => {
-		debugger;
 		this.setState(prevState => ({
 			modal: !prevState.modal
 		}));

@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import {connect} from "react-redux";
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import md5 from 'md5';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {
 	fetchClasses,
 	fetchSections,
 	registerUser
 } from "../../actions/login";
+import {API_SUCCESS} from "../../constants/common";
 
 
 class Register extends Component {
@@ -17,16 +17,25 @@ class Register extends Component {
 		this.props.fetchSections();
 	}
 
+	componentDidUpdate() {
+		const { registerUserStatus, cookies, user } = this.props;
+
+		if (registerUserStatus === API_SUCCESS){
+			const userCookie = {
+				id: user.id,
+				firstname: user.firstname
+			};
+			cookies.set('user', userCookie);
+		}
+	}
+
 	handleFormSubmit = (entity) => {
-		delete entity.confirmpassword;
-		let registrationFields = Object.assign({}, entity);
-		registrationFields.password = md5(entity.password);
 		this.props.registerUser(entity);
 	};
 
 	render() {
 		const { classes, sections, cookies } = this.props;
-		// cookies.set('name', 'Vignesh');
+		const userCookie = cookies.get('user');
 		const segmentSchema = yup.object().shape({
 			firstname: yup.string().required('First name is required'),
 			lastname: yup.string().required('Last name is required'),
@@ -40,6 +49,9 @@ class Register extends Component {
 			}),
 		});
 
+		if(userCookie){
+			return (<Redirect to={{pathname: "/dashboard"}}/>);
+		}
 		return (
 			<div className="bg-gradient-primary container-with-no-padding">
 				<div className="container">
@@ -212,6 +224,8 @@ class Register extends Component {
 const mapStateToProps = (state, ownProps) => ({
 	classes: state.login.classes,
 	sections: state.login.sections,
+	user: state.login.user,
+	registerUserStatus: state.login.registerUserStatus,
 	cookies: ownProps.cookies
 });
 

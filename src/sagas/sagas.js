@@ -67,7 +67,7 @@ export function* registerUserSaga(payload) {
 	try {
 		const result = yield call(registerUser, payload);
 		if(!result.error){
-			yield put(registerUserSuccess());
+			yield put(registerUserSuccess(result.data));
 		}else{
 			yield put(registerUserError());
 		}

@@ -62,13 +62,14 @@ export default handleActions({
 		...state,
 		registerUserStatus: ''
 	}),
-	[REGISTER_USER_SUCCESS]: (state) => ({
+	[REGISTER_USER_SUCCESS]: (state, { payload }) => ({
 		...state,
-		registerUserStatus: API_SUCCESS
+		registerUserStatus: API_SUCCESS,
+		user: payload
 	}),
 	[REGISTER_USER_ERROR]: (state) => ({
 		...state,
-		registerUserStatus: API_ERROR,
+		registerUserStatus: API_ERROR
 	}),
 }, {
 	user: {},

@@ -1,4 +1,5 @@
 import fetchJson from '../custom-lib/fetch-json';
+import md5 from "md5";
 
 const BASE_URL = 'http://localhost:5000';
 
@@ -21,10 +22,14 @@ export function fetchSections() {
 	});
 }
 
-export function registerUser(entity) {
+export function registerUser({payload}) {
+	let registrationFields = Object.assign({}, payload);
+	delete registrationFields.confirmpassword;
+	registrationFields.password = md5(payload.password);
+	
 	return fetchJson(`${BASE_URL}/users/register`, {
 		method: 'POST',
-		entity: entity.payload
+		entity: payload
 	});
 }
 
