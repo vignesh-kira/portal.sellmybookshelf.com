@@ -1,12 +1,15 @@
 import fetchJson from '../custom-lib/fetch-json';
 import md5 from "md5";
 
-const BASE_URL = 'http://api.sellmybookshelf.com/';
+const BASE_URL = 'http://localhost:6000';
 
-export function fetchUser(entity) {
+export function fetchUser({payload}) {
+	let entity = Object.assign({}, payload);
+	entity.password = md5(payload.password);
+
 	return fetchJson(`${BASE_URL}/users/login`, {
 		method: 'POST',
-		entity: entity.payload
+		entity
 	});
 }
 

@@ -6,13 +6,11 @@ import md5 from 'md5';
 import {Link , Redirect} from "react-router-dom";
 import "../../assets/styles/common.css";
 import { fetchUser } from '../../actions/login';
+import {API_SUCCESS} from "../../constants/common";
 
 
 class Login extends Component {
 	handleFormSubmit = (entity) => {
-		entity = Object.assign(entity, {
-			password: md5(entity.password)
-		});
 		this.props.fetchUser(entity);
 	};
 	render() {
@@ -25,7 +23,7 @@ class Login extends Component {
 			cookies.remove('user');
 		}
 
-		if(userFetchStatus){
+		if(userFetchStatus === API_SUCCESS){
 			const userCookie = {
 				id: user.id,
 				firstname: user.firstname
