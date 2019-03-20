@@ -5,7 +5,7 @@ const BASE_URL = 'http://api.sellmybookshelf.com';
 
 export function fetchUser({payload}) {
 	let entity = Object.assign({}, payload);
-	entity.password = md5(payload.password);
+	entity.password = md5(entity.password);
 
 	return fetchJson(`${BASE_URL}/users/login`, {
 		method: 'POST',
