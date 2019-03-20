@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLaughWink, faTachometerAlt, faSignOutAlt, faTools, faListOl, faPlusCircle, faEdit } from '@fortawesome/free-solid-svg-icons'
 import {withCookies} from "react-cookie";
-import {Link, Redirect} from "react-router-dom";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {Link} from "react-router-dom";
+import LogoutModal from "./LogoutModal";
 
 class SideNav extends Component {
 	constructor(props) {
@@ -11,23 +11,18 @@ class SideNav extends Component {
 		this.state = {
 			modal: false
 		};
-
-		this.toggle = this.toggle.bind(this);
 	}
 
-	toggle() {
+	toggle = () => {
+		debugger;
 		this.setState(prevState => ({
 			modal: !prevState.modal
 		}));
-	}
-
-	logout = (cookies) => {
-		cookies.remove('user');
-		window.location = '/';
 	};
 
 	render() {
 		const {cookies} = this.props;
+		const {modal} = this.state;
 		const user = cookies.get('user');
 
 		return (
@@ -118,18 +113,10 @@ class SideNav extends Component {
 					{/* Divider */}
 					<hr className="sidebar-divider d-none d-md-block"/>
 				</ul>
-				<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-					<ModalHeader toggle={this.toggle}>Logout</ModalHeader>
-					<ModalBody>
-						Are you sure, you would like to Logout?
-					</ModalBody>
-					<ModalFooter style={{justifyContent: 'center'}}>
-						<Button color="danger" size='lg'
-						        onClick={() =>this.logout(cookies)}
-						>Yes</Button>
-						<Button color="primary" size='lg' onClick={this.toggle}>No</Button>
-					</ModalFooter>
-				</Modal>
+				<LogoutModal
+					modal={modal}
+					toggle={this.toggle}
+				/>
 			</React.Fragment>
 		);
 	}
