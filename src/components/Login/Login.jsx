@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import md5 from 'md5';
 import {Link , Redirect} from "react-router-dom";
 import "../../assets/styles/common.css";
-import { fetchUser } from '../../actions/login';
+import { fetchUser } from '../../actions/portal';
 import {API_SUCCESS} from "../../constants/common";
 
 

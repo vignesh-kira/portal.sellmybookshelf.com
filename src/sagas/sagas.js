@@ -3,8 +3,10 @@ import {
 	fetchUser,
 	fetchClasses,
 	fetchSections,
-	registerUser
-} from '../apis/login';
+	registerUser,
+	fetchSubjects,
+	advertisementCreate
+} from '../apis/portal';
 import {
 	fetchUserSuccess,
 	fetchUserError,
@@ -13,11 +15,14 @@ import {
 	fetchSectionsSuccess,
 	fetchSectionsError,
 	registerUserSuccess,
-	registerUserError
-} from '../actions/login';
+	registerUserError,
+	fetchSubjectsSuccess,
+	fetchSubjectsError, advertisementCreateSuccess, advertisementCreateError
+} from '../actions/portal';
 import {
+	ADVERTISEMENT_CREATE,
 	FETCH_CLASSES,
-	FETCH_SECTIONS,
+	FETCH_SECTIONS, FETCH_SUBJECTS,
 	FETCH_USER,
 	REGISTER_USER
 } from '../constants/action-types';
@@ -49,6 +54,7 @@ export function* fetchClassesSaga(payload) {
 		yield put(fetchClassesError());
 	}
 }
+
 export function* fetchSectionsSaga(payload) {
 	try {
 		const result = yield call(fetchSections, payload);
@@ -76,6 +82,33 @@ export function* registerUserSaga(payload) {
 		yield put(registerUserError());
 	}
 }
+
+export function* fetchSubjectsSaga(payload) {
+	try {
+		const result = yield call(fetchSubjects, payload);
+		if(!result.error){
+			yield put(fetchSubjectsSuccess(result.data));
+		}else{
+			yield put(fetchSubjectsError());
+		}
+	} catch (e) {
+		yield put(fetchSubjectsError());
+	}
+}
+
+export function* advertisementCreateSaga(payload) {
+	try {
+		const result = yield call(advertisementCreate, payload);
+		if(!result.error){
+			yield put(advertisementCreateSuccess(result.data));
+		}else{
+			yield put(advertisementCreateError());
+		}
+	} catch (e) {
+		yield put(advertisementCreateError());
+	}
+}
+
 /*
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
   Allows concurrent fetches of user.
@@ -85,6 +118,8 @@ function* mySaga() {
 	yield takeEvery(FETCH_CLASSES, fetchClassesSaga);
 	yield takeEvery(FETCH_SECTIONS, fetchSectionsSaga);
 	yield takeEvery(REGISTER_USER, registerUserSaga);
+	yield takeEvery(FETCH_SUBJECTS, fetchSubjectsSaga);
+	yield takeEvery(ADVERTISEMENT_CREATE, advertisementCreateSaga);
 }
 
 

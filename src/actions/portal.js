@@ -16,3 +16,11 @@ export const fetchSectionsError = createAction(actions.FETCH_SECTIONS_ERROR);
 export const registerUser = createAction(actions.REGISTER_USER);
 export const registerUserSuccess = createAction(actions.REGISTER_USER_SUCCESS);
 export const registerUserError = createAction(actions.REGISTER_USER_ERROR);
+
+export const fetchSubjects = createAction(actions.FETCH_SUBJECTS);
+export const fetchSubjectsSuccess = createAction(actions.FETCH_SUBJECTS_SUCCESS);
+export const fetchSubjectsError = createAction(actions.FETCH_SUBJECTS_ERROR);
+
+export const advertisementCreate = createAction(actions.ADVERTISEMENT_CREATE);
+export const advertisementCreateSuccess = createAction(actions.ADVERTISEMENT_CREATE_SUCCESS);
+export const advertisementCreateError = createAction(actions.ADVERTISEMENT_CREATE_ERROR);

@@ -3,11 +3,11 @@ import createActionsWatchers from '../custom-lib/create-actions-watchers';
 
 import {
 	fetchUser
-} from '../apis/login';
+} from '../apis/portal';
 import {
 	fetchUserSuccess,
 	fetchUserError
-} from '../actions/login';
+} from '../actions/portal';
 import {
 	FETCH_USER
 } from '../constants/action-types';

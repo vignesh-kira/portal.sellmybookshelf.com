@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 import {API_SUCCESS} from "../../../constants/common";
 import * as yup from "yup";
 import {connect} from "react-redux";
-import {fetchClasses, fetchSections } from "../../../actions/login";
+import {fetchClasses, fetchSubjects } from "../../../actions/portal";
 
 class CreateAdvertisement extends Component {
 	constructor(props) {
@@ -20,7 +20,7 @@ class CreateAdvertisement extends Component {
 
 	componentDidMount() {
 		this.props.fetchClasses();
-		this.props.fetchSections();
+		this.props.fetchSubjects();
 	}
 
 	componentDidUpdate() {
@@ -36,14 +36,14 @@ class CreateAdvertisement extends Component {
 	}
 
 	render() {
-		const { classes, sections, cookies } = this.props;
+		const { classes, subjects } = this.props;
 //		const userCookie = cookies.get('user');
 
 		const segmentSchema = yup.object().shape({
 			title: yup.string().required('Adv. Title is required'),
 			description: yup.string().required('Description is required'),
 			studentClass: yup.string().required('Class is required'),
-			section: yup.string().required('Section is required'),
+			subject_id: yup.string().required('Subject is required'),
 			book_title: yup.string().required('Book Title is required'),
 			book_author: yup.string().required('Book Author is required'),
 			condition_text: yup.string().required('Condition Text is required'),
@@ -78,7 +78,7 @@ class CreateAdvertisement extends Component {
 							<div className="row justify-content-center">
 								<div className="col-lg-8 col-md-8">
 									<Formik
-										initialValues={{ title: '', description:'', book_title:'', book_author:'', studentClass:'', section:'', condition_text: '', condition_rating:'', book_seller_price: '', book_final_price: '' }}
+										initialValues={{ title: '', description:'', book_title:'', book_author:'', studentClass:'', subject_id: '', condition_text: '', condition_rating:'', book_seller_price: '', book_final_price: '' }}
 										validationSchema={segmentSchema}
 										onSubmit={this.handleFormSubmit}
 									>
@@ -117,23 +117,23 @@ class CreateAdvertisement extends Component {
 														{errors.studentClass && touched.studentClass && <div className="invalid-feedback">{errors.studentClass}</div>}
 													</div>
 													<div className="col-sm-2 text-left">
-														<label>Section:</label>
+														<label>Subject:</label>
 														<select
-															className={`form-control ${errors.section && touched.section && 'is-invalid'}`}
-															id="section"
-															name="section"
+															className={`form-control ${errors.subject_id && touched.subject_id && 'is-invalid'}`}
+															id="subject_id"
+															name="subject_id"
 															onChange={handleChange}
 															onBlur={handleBlur}
-															value={values.section}
+															value={values.subject_id}
 														>
-															<option value=""> - select -</option>
-															{sections.map(section => (
-																<option key={section.id} value={section.id}>
-																	{section.name}
+															<option value=""> - select - </option>
+															{subjects.map(subject => (
+																<option key={subject.id} value={subject.id}>
+																	{subject.name}
 																</option>
 															))}
 														</select>
-														{errors.section && touched.section && <div className="invalid-feedback">{errors.section}</div>}
+														{errors.subject_id && touched.subject_id && <div className="invalid-feedback">{errors.subject_id}</div>}
 													</div>
 												</div>
 												<div className="form-group row">
@@ -178,7 +178,7 @@ class CreateAdvertisement extends Component {
 												</div>
 												<div className="form-group row">
 													<div className="col-sm-6 text-left">
-														<label>Condition Text:</label>
+														<label>Book Condition: (Ex: Good, Torn, New, Never used etc.)</label>
 														<input type="text"
 														       className={`form-control ${errors.condition_text && touched.condition_text && 'is-invalid'}`}
 														       id="condition_text"
@@ -267,14 +267,14 @@ class CreateAdvertisement extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
 	classes: state.login.classes,
-	sections: state.login.sections,
+	subjects: state.login.subjects,
 	user: state.login.user,
 	cookies: ownProps.cookies
 });
 
 const mapDispatchToProps = {
 	fetchClasses,
-	fetchSections
+	fetchSubjects
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateAdvertisement);

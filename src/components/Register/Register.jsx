@@ -7,7 +7,7 @@ import {
 	fetchClasses,
 	fetchSections,
 	registerUser
-} from "../../actions/login";
+} from "../../actions/portal";
 import {API_SUCCESS} from "../../constants/common";
 
 

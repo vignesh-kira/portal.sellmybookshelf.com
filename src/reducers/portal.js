@@ -11,7 +11,12 @@ import {
 	FETCH_SECTIONS_ERROR,
 	REGISTER_USER,
 	REGISTER_USER_SUCCESS,
-	REGISTER_USER_ERROR
+	REGISTER_USER_ERROR,
+	FETCH_SUBJECTS,
+	FETCH_SUBJECTS_SUCCESS,
+	FETCH_SUBJECTS_ERROR,
+	ADVERTISEMENT_CREATE,
+	ADVERTISEMENT_CREATE_SUCCESS, ADVERTISEMENT_CREATE_ERROR
 } from '../constants/action-types';
 import {
 	API_SUCCESS,
@@ -71,6 +76,32 @@ export default handleActions({
 		...state,
 		registerUserStatus: API_ERROR
 	}),
+	[FETCH_SUBJECTS]: (state) => ({
+		...state,
+		subjectsFetchStatus: ''
+	}),
+	[FETCH_SUBJECTS_SUCCESS]: (state, { payload }) => ({
+		...state,
+		subjectsFetchStatus: API_SUCCESS,
+		subjects: payload
+	}),
+	[FETCH_SUBJECTS_ERROR]: (state) => ({
+		...state,
+		subjectsFetchStatus: API_ERROR
+	}),
+	[ADVERTISEMENT_CREATE]: (state) => ({
+		...state,
+		advertisementCreateStatus: ''
+	}),
+	[ADVERTISEMENT_CREATE_SUCCESS]: (state, { payload }) => ({
+		...state,
+		advertisementCreateStatus: API_SUCCESS,
+		advertisement: payload
+	}),
+	[ADVERTISEMENT_CREATE_ERROR]: (state) => ({
+		...state,
+		advertisementCreateStatus: API_ERROR
+	})
 }, {
 	user: {},
 	userFetchStatus: '',
@@ -78,5 +109,9 @@ export default handleActions({
 	classesFetchStatus: '',
 	sections: [],
 	sectionsFetchStatus: '',
-	registerUserStatus: ''
+	registerUserStatus: '',
+	subjects: [],
+	subjectsFetchStatus: '',
+	advertisement: {},
+	advertisementCreateStatus: ''
 });
