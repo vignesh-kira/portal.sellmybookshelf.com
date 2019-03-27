@@ -5,7 +5,7 @@ import {withCookies} from "react-cookie";
 class LogoutModal extends React.Component {
 	toggle = () =>{
 		this.props.toggle();
-	}
+	};
 
 	logout = (cookies) => {
 		cookies.remove('user');

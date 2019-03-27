@@ -8,7 +8,8 @@ import {Link} from "react-router-dom";
 import {API_SUCCESS} from "../../../constants/common";
 import * as yup from "yup";
 import {connect} from "react-redux";
-import {fetchClasses, fetchSubjects } from "../../../actions/portal";
+import {fetchClasses, fetchSubjects, advertisementCreate } from "../../../actions/portal";
+import {withCookies} from "react-cookie";
 
 class CreateAdvertisement extends Component {
 	constructor(props) {
@@ -24,9 +25,9 @@ class CreateAdvertisement extends Component {
 	}
 
 	componentDidUpdate() {
-		const { registerUserStatus, cookies, user } = this.props;
+		const { advertisementCreateStatus, advertisement } = this.props;
 
-		// if (registerUserStatus === API_SUCCESS){
+		// if (advertisementCreateStatus === API_SUCCESS){
 		// 	const userCookie = {
 		// 		id: user.id,
 		// 		firstname: user.firstname
@@ -34,6 +35,12 @@ class CreateAdvertisement extends Component {
 		// 	cookies.set('user', userCookie);
 		// }
 	}
+
+	handleFormSubmit = (entity) => {
+		const {cookies} = this.props;
+		entity.user_id = cookies.get('user').id;
+		this.props.advertisementCreate(entity);
+	};
 
 	render() {
 		const { classes, subjects } = this.props;
@@ -47,8 +54,8 @@ class CreateAdvertisement extends Component {
 			book_title: yup.string().required('Book Title is required'),
 			book_author: yup.string().required('Book Author is required'),
 			condition_text: yup.string().required('Condition Text is required'),
-			condition_rating: yup.string().required('Condition Rating is required'),
-			book_seller_price: yup.string().required('Book Seller Price is required'),
+			condition_rating: yup.number().min(1, 'Minimum is 1').max(10, 'Maximum is 10').required('Condition Rating is required'),
+			book_seller_price: yup.number().required('Book Seller Price is required'),
 			book_final_price: yup.string()
 		});
 
@@ -191,7 +198,7 @@ class CreateAdvertisement extends Component {
 													</div>
 													<div className="col-sm-6 text-left">
 														<label>Condition Rating (Out of 10):</label>
-														<input type="text"
+														<input type="number"
 														       className={`form-control ${errors.condition_rating && touched.condition_rating && 'is-invalid'}`}
 														       id="condition_rating"
 														       name="condition_rating"
@@ -205,7 +212,7 @@ class CreateAdvertisement extends Component {
 												<div className="form-group row">
 													<div className="col-sm-6 text-left">
 														<label>Book Price:</label>
-														<input type="text"
+														<input type="number"
 														       className={`form-control ${errors.book_seller_price && touched.book_seller_price && 'is-invalid'}`}
 														       id="book_seller_price"
 														       name="book_seller_price"
@@ -269,12 +276,14 @@ const mapStateToProps = (state, ownProps) => ({
 	classes: state.login.classes,
 	subjects: state.login.subjects,
 	user: state.login.user,
-	cookies: ownProps.cookies
+	cookies: ownProps.cookies,
+	advertisementCreateStatus: state.login.advertisementCreateStatus
 });
 
 const mapDispatchToProps = {
 	fetchClasses,
-	fetchSubjects
+	fetchSubjects,
+	advertisementCreate
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateAdvertisement);
+export default withCookies(connect(mapStateToProps, mapDispatchToProps)(CreateAdvertisement));

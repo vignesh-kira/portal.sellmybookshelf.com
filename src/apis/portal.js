@@ -44,12 +44,9 @@ export function registerUser({payload}) {
 }
 
 export function advertisementCreate({payload}) {
-	let registrationFields = Object.assign({}, payload);
-	delete registrationFields.confirmpassword;
-	registrationFields.password = md5(payload.password);
 
-	return fetchJson(`${BASE_URL}/users/register`, {
+	return fetchJson(`${BASE_URL}/advertisements/create`, {
 		method: 'POST',
-		entity: registrationFields
+		entity: payload
 	});
 }
