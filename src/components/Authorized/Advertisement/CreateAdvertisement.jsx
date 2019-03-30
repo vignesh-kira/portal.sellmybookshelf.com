@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import * as yup from "yup";
+import {connect} from "react-redux";
+import {withCookies} from "react-cookie";
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'
@@ -6,10 +9,8 @@ import Footer  from '../../Shared/Footer'
 import {Formik} from "formik";
 import {Link} from "react-router-dom";
 import {API_SUCCESS} from "../../../constants/common";
-import * as yup from "yup";
-import {connect} from "react-redux";
 import {fetchClasses, fetchSubjects, advertisementCreate } from "../../../actions/portal";
-import {withCookies} from "react-cookie";
+import MessageModal from "../common/MessageModal";
 
 class CreateAdvertisement extends Component {
 	constructor(props) {
@@ -18,7 +19,11 @@ class CreateAdvertisement extends Component {
 			seller_final_price: ''
 		};
 	}
-
+	toggleMessageModal = () => {
+		this.setState(prevState => ({
+			messageModal: !prevState.messageModal
+		}));
+	};
 	componentDidMount() {
 		this.props.fetchClasses();
 		this.props.fetchSubjects();
@@ -26,7 +31,6 @@ class CreateAdvertisement extends Component {
 
 	componentDidUpdate() {
 		const { advertisementCreateStatus, advertisement } = this.props;
-
 		// if (advertisementCreateStatus === API_SUCCESS){
 		// 	const userCookie = {
 		// 		id: user.id,
@@ -43,7 +47,8 @@ class CreateAdvertisement extends Component {
 	};
 
 	render() {
-		const { classes, subjects } = this.props;
+		const { classes, subjects, advertisementCreateStatus } = this.props;
+		const {messageModal} = this.state;
 //		const userCookie = cookies.get('user');
 
 		const segmentSchema = yup.object().shape({
@@ -266,7 +271,7 @@ class CreateAdvertisement extends Component {
 				</div>
 				{/* End of Content Wrapper */}
 
-
+				<MessageModal />
 			</div>
 		);
 	}
