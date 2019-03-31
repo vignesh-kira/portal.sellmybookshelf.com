@@ -2,9 +2,8 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {withCookies} from "react-cookie";
 import {connect} from "react-redux";
-import {advertisementCreate, fetchClasses, fetchSubjects} from "../../../actions/portal";
 import {API_SUCCESS} from "../../../constants/common";
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 
 class MessageModal extends React.Component {
 	constructor(props) {
@@ -39,7 +38,7 @@ class MessageModal extends React.Component {
 	);
 
 	render() {
-		const {cookies, modal, advertisementCreateStatus} = this.props;
+		const {advertisementCreateStatus} = this.props;
 		const {messageModal} = this.state;
 
 		return (
