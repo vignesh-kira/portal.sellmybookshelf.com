@@ -43,9 +43,10 @@ export function registerUser({payload}) {
 	});
 }
 
-export function advertisementFetch({payload}) {
-	return fetchJson(`${BASE_URL}/advertisements/${payload}`, {
-		method: 'GET'
+export function advertisementFetch({payload : {entity, id}}) {
+	return fetchJson(`${BASE_URL}/advertisements/${id}`, {
+		method: 'POST',
+		entity
 	});
 }
 
@@ -59,10 +60,10 @@ export function advertisementCreate({payload}) {
 }
 
 
-export function advertisementUpdate({payload, id}) {
+export function advertisementUpdate({payload : {entity, id}}) {
 	debugger;
 	return fetchJson(`${BASE_URL}/advertisements/update/${id}`, {
 		method: 'PUT',
-		entity: payload
+		entity
 	});
 }
