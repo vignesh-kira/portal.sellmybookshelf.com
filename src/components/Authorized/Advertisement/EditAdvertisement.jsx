@@ -38,6 +38,18 @@ class EditAdvertisement extends Component {
 
 	render() {
 		const { classes, subjects, advertisement, advertisementFetchStatus } = this.props;
+		const {
+			title,
+			description,
+			book_title,
+			book_author,
+			class_id,
+			subject_id,
+			condition_text,
+			condition_rating,
+			book_seller_price,
+			book_final_price
+		}= advertisement;
 		const segmentSchema = yup.object().shape({
 			title: yup.string().required('Adv. Title is required'),
 			description: yup.string().required('Description is required'),
@@ -78,16 +90,16 @@ class EditAdvertisement extends Component {
 										<div className="col-lg-8 col-md-8">
 											<Formik
 												initialValues={{
-													title: '',
-													description: '',
-													book_title: '',
-													book_author: '',
-													studentClass: '',
-													subject_id: '',
-													condition_text: '',
-													condition_rating: '',
-													book_seller_price: '',
-													book_final_price: ''
+													title,
+													description,
+													book_title,
+													book_author,
+													studentClass: class_id,
+													subject_id,
+													condition_text,
+													condition_rating,
+													book_seller_price,
+													book_final_price
 												}}
 												validationSchema={segmentSchema}
 												onSubmit={this.handleFormSubmit}
