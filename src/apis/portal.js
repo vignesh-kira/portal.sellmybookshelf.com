@@ -43,10 +43,26 @@ export function registerUser({payload}) {
 	});
 }
 
+export function advertisementFetch({payload}) {
+	return fetchJson(`${BASE_URL}/advertisements/${payload}`, {
+		method: 'GET'
+	});
+}
+
+
 export function advertisementCreate({payload}) {
 
 	return fetchJson(`${BASE_URL}/advertisements/create`, {
 		method: 'POST',
+		entity: payload
+	});
+}
+
+
+export function advertisementUpdate({payload, id}) {
+	debugger;
+	return fetchJson(`${BASE_URL}/advertisements/update/${id}`, {
+		method: 'PUT',
 		entity: payload
 	});
 }

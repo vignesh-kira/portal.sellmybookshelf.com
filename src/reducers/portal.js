@@ -16,7 +16,14 @@ import {
 	FETCH_SUBJECTS_SUCCESS,
 	FETCH_SUBJECTS_ERROR,
 	ADVERTISEMENT_CREATE,
-	ADVERTISEMENT_CREATE_SUCCESS, ADVERTISEMENT_CREATE_ERROR
+	ADVERTISEMENT_CREATE_SUCCESS,
+	ADVERTISEMENT_CREATE_ERROR,
+	ADVERTISEMENT_UPDATE,
+	ADVERTISEMENT_UPDATE_SUCCESS,
+	ADVERTISEMENT_UPDATE_ERROR,
+	ADVERTISEMENT_FETCH,
+	ADVERTISEMENT_FETCH_SUCCESS,
+	ADVERTISEMENT_FETCH_ERROR
 } from '../constants/action-types';
 import {
 	API_SUCCESS,
@@ -101,6 +108,32 @@ export default handleActions({
 	[ADVERTISEMENT_CREATE_ERROR]: (state) => ({
 		...state,
 		advertisementCreateStatus: API_ERROR
+	}),
+	[ADVERTISEMENT_UPDATE]: (state) => ({
+		...state,
+		advertisementUpdateStatus: ''
+	}),
+	[ADVERTISEMENT_UPDATE_SUCCESS]: (state, { payload }) => ({
+		...state,
+		advertisementUpdateStatus: API_SUCCESS,
+		advertisement: payload
+	}),
+	[ADVERTISEMENT_UPDATE_ERROR]: (state) => ({
+		...state,
+		advertisementUpdateStatus: API_ERROR
+	}),
+	[ADVERTISEMENT_FETCH]: (state) => ({
+		...state,
+		advertisementFetchStatus: ''
+	}),
+	[ADVERTISEMENT_FETCH_SUCCESS]: (state, { payload }) => ({
+		...state,
+		advertisementFetchStatus: API_SUCCESS,
+		advertisement: payload
+	}),
+	[ADVERTISEMENT_FETCH_ERROR]: (state) => ({
+		...state,
+		advertisementFetchStatus: API_ERROR
 	})
 }, {
 	user: {},
@@ -113,5 +146,7 @@ export default handleActions({
 	subjects: [],
 	subjectsFetchStatus: '',
 	advertisement: {},
-	advertisementCreateStatus: ''
+	advertisementCreateStatus: '',
+	advertisementUpdateStatus: '',
+	advertisementFetchStatus: '',
 });

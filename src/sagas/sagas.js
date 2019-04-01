@@ -5,7 +5,9 @@ import {
 	fetchSections,
 	registerUser,
 	fetchSubjects,
-	advertisementCreate
+	advertisementCreate,
+	advertisementUpdate,
+	advertisementFetch
 } from '../apis/portal';
 import {
 	fetchUserSuccess,
@@ -17,14 +19,23 @@ import {
 	registerUserSuccess,
 	registerUserError,
 	fetchSubjectsSuccess,
-	fetchSubjectsError, advertisementCreateSuccess, advertisementCreateError
+	fetchSubjectsError,
+	advertisementCreateSuccess,
+	advertisementCreateError,
+	advertisementUpdateSuccess,
+	advertisementUpdateError,
+	advertisementFetchSuccess,
+	advertisementFetchError
 } from '../actions/portal';
 import {
-	ADVERTISEMENT_CREATE,
 	FETCH_CLASSES,
-	FETCH_SECTIONS, FETCH_SUBJECTS,
+	FETCH_SECTIONS,
+	FETCH_SUBJECTS,
 	FETCH_USER,
-	REGISTER_USER
+	REGISTER_USER,
+	ADVERTISEMENT_CREATE,
+	ADVERTISEMENT_UPDATE,
+	ADVERTISEMENT_FETCH
 } from '../constants/action-types';
 
 export function* fetchUserSaga(payload) {
@@ -109,6 +120,32 @@ export function* advertisementCreateSaga(payload) {
 	}
 }
 
+export function* advertisementUpdateSaga(payload) {
+	try {
+		const result = yield call(advertisementUpdate, payload);
+		if(!result.error){
+			yield put(advertisementUpdateSuccess(result.data));
+		}else{
+			yield put(advertisementUpdateError());
+		}
+	} catch (e) {
+		yield put(advertisementUpdateError());
+	}
+}
+
+export function* advertisementFetchSaga(payload) {
+	try {
+		const result = yield call(advertisementFetch, payload);
+		if(!result.error){
+			yield put(advertisementFetchSuccess(result.data));
+		}else{
+			yield put(advertisementFetchError());
+		}
+	} catch (e) {
+		yield put(advertisementFetchError());
+	}
+}
+
 /*
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
   Allows concurrent fetches of user.
@@ -120,6 +157,8 @@ function* mySaga() {
 	yield takeEvery(REGISTER_USER, registerUserSaga);
 	yield takeEvery(FETCH_SUBJECTS, fetchSubjectsSaga);
 	yield takeEvery(ADVERTISEMENT_CREATE, advertisementCreateSaga);
+	yield takeEvery(ADVERTISEMENT_UPDATE, advertisementUpdateSaga);
+	yield takeEvery(ADVERTISEMENT_FETCH, advertisementFetchSaga);
 }
 
 

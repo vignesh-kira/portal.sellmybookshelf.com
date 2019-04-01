@@ -21,6 +21,14 @@ export const fetchSubjects = createAction(actions.FETCH_SUBJECTS);
 export const fetchSubjectsSuccess = createAction(actions.FETCH_SUBJECTS_SUCCESS);
 export const fetchSubjectsError = createAction(actions.FETCH_SUBJECTS_ERROR);
 
+export const advertisementFetch = createAction(actions.ADVERTISEMENT_FETCH);
+export const advertisementFetchSuccess = createAction(actions.ADVERTISEMENT_FETCH_SUCCESS);
+export const advertisementFetchError = createAction(actions.ADVERTISEMENT_FETCH_ERROR);
+
 export const advertisementCreate = createAction(actions.ADVERTISEMENT_CREATE);
 export const advertisementCreateSuccess = createAction(actions.ADVERTISEMENT_CREATE_SUCCESS);
 export const advertisementCreateError = createAction(actions.ADVERTISEMENT_CREATE_ERROR);
+
+export const advertisementUpdate = createAction(actions.ADVERTISEMENT_CREATE);
+export const advertisementUpdateSuccess = createAction(actions.ADVERTISEMENT_UPDATE_SUCCESS);
+export const advertisementUpdateError = createAction(actions.ADVERTISEMENT_UPDATE_ERROR);

@@ -7,8 +7,6 @@ import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'
 import Footer  from '../../Shared/Footer'
 import {Formik} from "formik";
-import {Link} from "react-router-dom";
-import {API_SUCCESS} from "../../../constants/common";
 import {fetchClasses, fetchSubjects, advertisementCreate } from "../../../actions/portal";
 import MessageModal from "../common/MessageModal";
 
@@ -19,25 +17,9 @@ class CreateAdvertisement extends Component {
 			seller_final_price: ''
 		};
 	}
-	toggleMessageModal = () => {
-		this.setState(prevState => ({
-			messageModal: !prevState.messageModal
-		}));
-	};
 	componentDidMount() {
 		this.props.fetchClasses();
 		this.props.fetchSubjects();
-	}
-
-	componentDidUpdate() {
-		const { advertisementCreateStatus, advertisement } = this.props;
-		// if (advertisementCreateStatus === API_SUCCESS){
-		// 	const userCookie = {
-		// 		id: user.id,
-		// 		firstname: user.firstname
-		// 	};
-		// 	cookies.set('user', userCookie);
-		// }
 	}
 
 	handleFormSubmit = (entity) => {
@@ -47,10 +29,7 @@ class CreateAdvertisement extends Component {
 	};
 
 	render() {
-		const { classes, subjects, advertisementCreateStatus } = this.props;
-		const {messageModal} = this.state;
-//		const userCookie = cookies.get('user');
-
+		const { classes, subjects } = this.props;
 		const segmentSchema = yup.object().shape({
 			title: yup.string().required('Adv. Title is required'),
 			description: yup.string().required('Description is required'),

@@ -1,11 +1,51 @@
 import React, {Component} from 'react';
+import * as yup from "yup";
+import {connect} from "react-redux";
+import {withCookies} from "react-cookie";
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'
 import Footer  from '../../Shared/Footer'
+import {Formik} from "formik";
+import {fetchClasses, fetchSubjects, advertisementUpdate, advertisementFetch } from "../../../actions/portal";
+import MessageModal from "../common/MessageModal";
 
 class EditAdvertisement extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			seller_final_price: '',
+			advertisement: {}
+		};
+	}
+
+	componentDidMount() {
+		const { match: { params : {id} } } = this.props;
+		this.props.advertisementFetch(id);
+		this.props.fetchClasses();
+		this.props.fetchSubjects();
+	}
+
+	handleFormSubmit = (entity) => {
+		const {cookies} = this.props;
+		this.props.advertisementUpdate(entity, cookies.get('user').id);
+	};
+
 	render() {
+		const { classes, subjects, advertisement } = this.props;
+		const segmentSchema = yup.object().shape({
+			title: yup.string().required('Adv. Title is required'),
+			description: yup.string().required('Description is required'),
+			studentClass: yup.string().required('Class is required'),
+			subject_id: yup.string().required('Subject is required'),
+			book_title: yup.string().required('Book Title is required'),
+			book_author: yup.string().required('Book Author is required'),
+			condition_text: yup.string().required('Condition Text is required'),
+			condition_rating: yup.number().min(1, 'Minimum is 1').max(10, 'Maximum is 10').required('Condition Rating is required'),
+			book_seller_price: yup.number().required('Book Seller Price is required'),
+			book_final_price: yup.string()
+		});
+
 		return (
 			<div id="wrapper">
 				{/* Sidebar */}
@@ -29,89 +69,175 @@ class EditAdvertisement extends Component {
 							<PageTitle title="Edit Advertisement"/>
 
 							{/* Content Row */}
-							<div className="row">
-
-								{/* Earnings (Monthly) Card Example */}
-								<div className="col-xl-3 col-md-6 mb-4">
-									<div className="card border-left-primary shadow h-100 py-2">
-										<div className="card-body">
-											<div className="row no-gutters align-items-center">
-												<div className="col mr-2">
-													<div
-														className="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings
-														(Monthly)
+							<div className="row justify-content-center">
+								<div className="col-lg-8 col-md-8">
+									<Formik
+										initialValues={{ title: '', description:'', book_title:'', book_author:'', studentClass:'', subject_id: '', condition_text: '', condition_rating:'', book_seller_price: '', book_final_price: '' }}
+										validationSchema={segmentSchema}
+										onSubmit={this.handleFormSubmit}
+									>
+										{({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (
+											<form onSubmit={handleSubmit} >
+												<div className="form-group row">
+													<div className="col-sm-8 text-left">
+														<label>Advertisement Title:</label>
+														<input type="text"
+														       className={`form-control ${errors.title && touched.title && 'is-invalid'}`}
+														       id="title"
+														       name="title"
+														       onChange={handleChange}
+														       onBlur={handleBlur}
+														       value={values.title}
+														/>
+														{errors.title && touched.title && <div className="invalid-feedback">{errors.title}</div>}
 													</div>
-													<div className="h5 mb-0 font-weight-bold text-gray-800">$40,000
+													<div className="col-sm-2 text-left">
+														<label>Class:</label>
+														<select
+															className={`form-control ${errors.studentClass && touched.studentClass && 'is-invalid'}`}
+															id="studentClass"
+															name="studentClass"
+															onChange={handleChange}
+															onBlur={handleBlur}
+															value={values.studentClass}
+														>
+															<option value=""> - select - </option>
+															{classes.map(classInfo => (
+																<option key={classInfo.id} value={classInfo.id}>
+																	{classInfo.name}
+																</option>
+															))}
+														</select>
+														{errors.studentClass && touched.studentClass && <div className="invalid-feedback">{errors.studentClass}</div>}
 													</div>
-												</div>
-												<div className="col-auto">
-													<i className="fa fa-calendar fa-2x text-gray-300"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								{/* Earnings (Monthly) Card Example */}
-								<div className="col-xl-3 col-md-6 mb-4">
-									<div className="card border-left-success shadow h-100 py-2">
-										<div className="card-body">
-											<div className="row no-gutters align-items-center">
-												<div className="col mr-2">
-													<div
-														className="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings
-														(Annual)
-													</div>
-													<div className="h5 mb-0 font-weight-bold text-gray-800">$215,000
-													</div>
-												</div>
-												<div className="col-auto">
-													<i className="fa fa-comments fa-2x text-gray-300"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								{/* Earnings (Monthly) Card Example */}
-								<div className="col-xl-3 col-md-6 mb-4">
-									<div className="card border-left-info shadow h-100 py-2">
-										<div className="card-body">
-											<div className="row no-gutters align-items-center">
-												<div className="col mr-2">
-													<div
-														className="text-xs font-weight-bold text-info text-uppercase mb-1">Earnings
-														(Monthly)
-													</div>
-													<div className="h5 mb-0 font-weight-bold text-gray-800">$40,000
-													</div>
-												</div>
-												<div className="col-auto">
-													<i className="fa fa-comments fa-2x text-gray-300"></i>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								{/* Earnings (Monthly) Card Example */}
-								<div className="col-xl-3 col-md-6 mb-4">
-									<div className="card border-left-warning shadow h-100 py-2">
-										<div className="card-body">
-											<div className="row no-gutters align-items-center">
-												<div className="col mr-2">
-													<div
-														className="text-xs font-weight-bold text-warning text-uppercase mb-1">Earnings
-														(Annual)
-													</div>
-													<div className="h5 mb-0 font-weight-bold text-gray-800">$215,000
+													<div className="col-sm-2 text-left">
+														<label>Subject:</label>
+														<select
+															className={`form-control ${errors.subject_id && touched.subject_id && 'is-invalid'}`}
+															id="subject_id"
+															name="subject_id"
+															onChange={handleChange}
+															onBlur={handleBlur}
+															value={values.subject_id}
+														>
+															<option value=""> - select - </option>
+															{subjects.map(subject => (
+																<option key={subject.id} value={subject.id}>
+																	{subject.name}
+																</option>
+															))}
+														</select>
+														{errors.subject_id && touched.subject_id && <div className="invalid-feedback">{errors.subject_id}</div>}
 													</div>
 												</div>
-												<div className="col-auto">
-													<i className="fa fa-comments fa-2x text-gray-300"></i>
+												<div className="form-group row">
+													<div className="col-sm-12 text-left">
+														<label>Description:</label>
+														<textarea className={`form-control ${errors.description && touched.description && 'is-invalid'}`}
+														          id="description"
+														          name="description"
+														          onChange={handleChange}
+														          onBlur={handleBlur}
+														          value={values.description}
+														>
+														</textarea>
+														{errors.description && touched.description && <div className="invalid-feedback">{errors.description}</div>}
+													</div>
 												</div>
-											</div>
-										</div>
-									</div>
+												<div className="form-group row">
+													<div className="col-sm-6 text-left">
+														<label>Book Title:</label>
+														<input type="text"
+														       className={`form-control ${errors.book_title && touched.book_title && 'is-invalid'}`}
+														       id="book_title"
+														       name="book_title"
+														       onChange={handleChange}
+														       onBlur={handleBlur}
+														       value={values.book_title}
+														/>
+														{errors.book_title && touched.book_title && <div className="invalid-feedback">{errors.book_title}</div>}
+													</div>
+													<div className="col-sm-6 text-left">
+														<label>Book Author:</label>
+														<input type="text"
+														       className={`form-control ${errors.book_author && touched.book_author && 'is-invalid'}`}
+														       id="book_author"
+														       name="book_author"
+														       onChange={handleChange}
+														       onBlur={handleBlur}
+														       value={values.book_author}
+														/>
+														{errors.book_author && touched.book_author && <div className="invalid-feedback">{errors.book_author}</div>}
+													</div>
+												</div>
+												<div className="form-group row">
+													<div className="col-sm-6 text-left">
+														<label>Book Condition: (Ex: Good, Torn, New, Never used etc.)</label>
+														<input type="text"
+														       className={`form-control ${errors.condition_text && touched.condition_text && 'is-invalid'}`}
+														       id="condition_text"
+														       name="condition_text"
+														       onChange={handleChange}
+														       onBlur={handleBlur}
+														       value={values.condition_text}
+														/>
+														{errors.condition_text && touched.condition_text && <div className="invalid-feedback">{errors.condition_text}</div>}
+													</div>
+													<div className="col-sm-6 text-left">
+														<label>Condition Rating (Out of 10):</label>
+														<input type="number"
+														       className={`form-control ${errors.condition_rating && touched.condition_rating && 'is-invalid'}`}
+														       id="condition_rating"
+														       name="condition_rating"
+														       onChange={handleChange}
+														       onBlur={handleBlur}
+														       value={values.condition_rating}
+														/>
+														{errors.condition_rating && touched.condition_rating && <div className="invalid-feedback">{errors.condition_rating}</div>}
+													</div>
+												</div>
+												<div className="form-group row">
+													<div className="col-sm-6 text-left">
+														<label>Book Price:</label>
+														<input type="number"
+														       className={`form-control ${errors.book_seller_price && touched.book_seller_price && 'is-invalid'}`}
+														       id="book_seller_price"
+														       name="book_seller_price"
+														       onBlur={handleBlur}
+														       value={values.book_seller_price}
+														       onChange={(e) => {
+															       values.book_final_price = (e.target.value * 1.10).toFixed(2);
+															       handleChange(e);
+														       }}
+														/>
+														{errors.book_seller_price && touched.book_seller_price && <div className="invalid-feedback">{errors.book_seller_price}</div>}
+													</div>
+													<div className="col-sm-6 text-left">
+														<label>Book Final Price:</label>
+														<input type="text"
+														       className="form-control"
+														       id="book_final_price"
+														       name="book_final_price"
+														       disabled
+														       value={values.book_final_price}
+														/>
+													</div>
+												</div>
+												<div className="form-group row">
+													<div className="col text-center">
+														<button
+															type="submit"
+															className="btn btn-primary btn-lg"
+															onClick={handleSubmit}
+														>
+															Edit Advertisement
+														</button>
+													</div>
+												</div>
+											</form>
+										)}
+									</Formik>
+									<hr />
 								</div>
 							</div>
 						</div>
@@ -127,10 +253,26 @@ class EditAdvertisement extends Component {
 				</div>
 				{/* End of Content Wrapper */}
 
-
+				<MessageModal />
 			</div>
 		);
 	}
 }
-export default EditAdvertisement;
 
+const mapStateToProps = (state, ownProps) => ({
+	classes: state.login.classes,
+	subjects: state.login.subjects,
+	user: state.login.user,
+	cookies: ownProps.cookies,
+	advertisement: state.login.advertisement,
+	advertisementUpdateStatus: state.login.advertisementUpdateStatus
+});
+
+const mapDispatchToProps = {
+	fetchClasses,
+	fetchSubjects,
+	advertisementUpdate,
+	advertisementFetch
+};
+
+export default withCookies(connect(mapStateToProps, mapDispatchToProps)(EditAdvertisement));

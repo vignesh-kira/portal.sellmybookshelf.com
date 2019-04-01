@@ -10,7 +10,7 @@ const AdvertisementWrapper = () => {
 		<div>
 			<Route path="/advertisement/list" component={ListAdvertisement} />
 			<Route path="/advertisement/create" component={CreateAdvertisement} />
-			<Route path="/advertisement/edit" component={EditAdvertisement} />
+			<Route path="/advertisement/edit/:id" component={EditAdvertisement} />
 		</div>
 	)
 };
