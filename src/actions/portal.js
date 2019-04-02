@@ -29,6 +29,6 @@ export const advertisementCreate = createAction(actions.ADVERTISEMENT_CREATE);
 export const advertisementCreateSuccess = createAction(actions.ADVERTISEMENT_CREATE_SUCCESS);
 export const advertisementCreateError = createAction(actions.ADVERTISEMENT_CREATE_ERROR);
 
-export const advertisementUpdate = createAction(actions.ADVERTISEMENT_CREATE);
+export const advertisementUpdate = createAction(actions.ADVERTISEMENT_UPDATE);
 export const advertisementUpdateSuccess = createAction(actions.ADVERTISEMENT_UPDATE_SUCCESS);
 export const advertisementUpdateError = createAction(actions.ADVERTISEMENT_UPDATE_ERROR);

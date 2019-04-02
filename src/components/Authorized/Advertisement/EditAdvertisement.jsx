@@ -8,7 +8,7 @@ import PageTitle  from '../common/PageTitle'
 import Footer  from '../../Shared/Footer'
 import {Formik} from "formik";
 import {fetchClasses, fetchSubjects, advertisementUpdate, advertisementFetch } from "../../../actions/portal";
-import MessageModal from "../common/MessageModal";
+import AdvertisementUpdateModal from "../common/AdvertisementUpdateModal";
 import {API_ERROR, API_SUCCESS} from "../../../constants/common";
 
 class EditAdvertisement extends Component {
@@ -32,12 +32,13 @@ class EditAdvertisement extends Component {
 	}
 
 	handleFormSubmit = (entity) => {
-		const {cookies} = this.props;
-		this.props.advertisementUpdate(entity, cookies.get('user').id);
+		const {cookies, advertisementUpdate, match: { params : {id} }} = this.props;
+
+		advertisementUpdate({entity, id});
 	};
 
 	render() {
-		const { classes, subjects, advertisement, advertisementFetchStatus } = this.props;
+		const { classes, subjects, advertisement, advertisementFetchStatus, advertisementUpdateStatus } = this.props;
 		const {
 			title,
 			description,
@@ -305,7 +306,7 @@ class EditAdvertisement extends Component {
 				</div>
 				{/* End of Content Wrapper */}
 
-				<MessageModal />
+				<AdvertisementUpdateModal />
 			</div>
 		);
 	}

@@ -61,7 +61,6 @@ export function advertisementCreate({payload}) {
 
 
 export function advertisementUpdate({payload : {entity, id}}) {
-	debugger;
 	return fetchJson(`${BASE_URL}/advertisements/update/${id}`, {
 		method: 'PUT',
 		entity

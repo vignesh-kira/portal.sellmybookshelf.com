@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {API_SUCCESS} from "../../../constants/common";
 import { withRouter } from 'react-router-dom';
 
-class MessageModal extends React.Component {
+class AdvertisementUpdateModal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -14,18 +14,13 @@ class MessageModal extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const {advertisementCreateStatus} = this.props;
-		if(prevProps.advertisementCreateStatus !==  advertisementCreateStatus){
+		const {advertisementUpdateStatus} = this.props;
+		if(prevProps.advertisementUpdateStatus !==  advertisementUpdateStatus){
 			this.toggle();
 		}
 	}
 
 	toggle = () =>{
-		const {advertisementCreateStatus, history} = this.props;
-		const {messageModal} = this.state;
-		if(messageModal && advertisementCreateStatus === API_SUCCESS ){
-			return history.push("/advertisement/list");
-		}
 		this.setState(prevState => ({
 			messageModal: !prevState.messageModal
 		}));
@@ -33,19 +28,19 @@ class MessageModal extends React.Component {
 
 	modalMessage = (status) => (
 		status === API_SUCCESS
-			? 'Advertisement has been created successfully!'
-			: 'Advertisement was not created. Please try again later!'
+			? 'Advertisement has been updated successfully!'
+			: 'Advertisement was not updated. Please try again later!'
 	);
 
 	render() {
-		const {advertisementCreateStatus} = this.props;
+		const {advertisementUpdateStatus} = this.props;
 		const {messageModal} = this.state;
 
 		return (
 			<Modal isOpen={messageModal} toggle={this.toggle}>
 				<ModalHeader toggle={this.toggle}>Logout</ModalHeader>
 				<ModalBody>
-					{this.modalMessage(advertisementCreateStatus)}
+					{this.modalMessage(advertisementUpdateStatus)}
 				</ModalBody>
 				<ModalFooter style={{justifyContent: 'center'}}>
 					<Button color="primary" size='lg' onClick={this.toggle}>close</Button>
@@ -56,11 +51,11 @@ class MessageModal extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	advertisementCreateStatus: state.login.advertisementCreateStatus
+	advertisementUpdateStatus: state.login.advertisementUpdateStatus
 });
 
 // const mapDispatchToProps = {
 // 	fetchClasses
 // };
 
-export default withCookies(withRouter(connect(mapStateToProps)(MessageModal)));
+export default withCookies(withRouter(connect(mapStateToProps)(AdvertisementUpdateModal)));
