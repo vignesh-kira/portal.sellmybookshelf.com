@@ -1,8 +1,8 @@
 import fetchJson from '../custom-lib/fetch-json';
 import md5 from "md5";
 
-//const BASE_URL = 'http://api.sellmybookshelf.com';
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = process.env.REACT_APP_API_URL;
+console.log(process.env);
 
 export function fetchUser({payload}) {
 	let entity = Object.assign({}, payload);

@@ -7,3 +7,4 @@ Open Nav items on leftnav menu item click
 LeftNav collapse
 ENV file
 Logout page
+OPTIONS refused to connect in chrome
