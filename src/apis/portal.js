@@ -66,3 +66,9 @@ export function advertisementUpdate({payload : {entity, id}}) {
 		entity
 	});
 }
+
+export function advertisementsListFetch() {
+	return fetchJson(`${BASE_URL}/advertisements`, {
+		method: 'GET'
+	});
+}

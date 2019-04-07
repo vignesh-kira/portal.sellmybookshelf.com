@@ -32,3 +32,7 @@ export const advertisementCreateError = createAction(actions.ADVERTISEMENT_CREAT
 export const advertisementUpdate = createAction(actions.ADVERTISEMENT_UPDATE);
 export const advertisementUpdateSuccess = createAction(actions.ADVERTISEMENT_UPDATE_SUCCESS);
 export const advertisementUpdateError = createAction(actions.ADVERTISEMENT_UPDATE_ERROR);
+
+export const advertisementsListFetch = createAction(actions.ADVERTISEMENTS_LIST_FETCH);
+export const advertisementsListFetchSuccess = createAction(actions.ADVERTISEMENTS_LIST_FETCH_SUCCESS);
+export const advertisementsListFetchError = createAction(actions.ADVERTISEMENTS_LIST_FETCH_ERROR);

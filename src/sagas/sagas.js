@@ -7,7 +7,8 @@ import {
 	fetchSubjects,
 	advertisementCreate,
 	advertisementUpdate,
-	advertisementFetch
+	advertisementFetch,
+	advertisementsListFetch
 } from '../apis/portal';
 import {
 	fetchUserSuccess,
@@ -25,7 +26,9 @@ import {
 	advertisementUpdateSuccess,
 	advertisementUpdateError,
 	advertisementFetchSuccess,
-	advertisementFetchError
+	advertisementFetchError,
+	advertisementsListFetchSuccess,
+	advertisementsListFetchError
 } from '../actions/portal';
 import {
 	FETCH_CLASSES,
@@ -35,7 +38,8 @@ import {
 	REGISTER_USER,
 	ADVERTISEMENT_CREATE,
 	ADVERTISEMENT_UPDATE,
-	ADVERTISEMENT_FETCH
+	ADVERTISEMENT_FETCH,
+	ADVERTISEMENTS_LIST_FETCH
 } from '../constants/action-types';
 
 export function* fetchUserSaga(payload) {
@@ -146,6 +150,19 @@ export function* advertisementFetchSaga(payload) {
 	}
 }
 
+export function* advertisementsListFetchSaga(payload) {
+	try {
+		const result = yield call(advertisementsListFetch, payload);
+		if(!result.error){
+			yield put(advertisementsListFetchSuccess(result.data));
+		}else{
+			yield put(advertisementsListFetchError());
+		}
+	} catch (e) {
+		yield put(advertisementsListFetchError());
+	}
+}
+
 /*
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
   Allows concurrent fetches of user.
@@ -159,6 +176,7 @@ function* mySaga() {
 	yield takeEvery(ADVERTISEMENT_CREATE, advertisementCreateSaga);
 	yield takeEvery(ADVERTISEMENT_UPDATE, advertisementUpdateSaga);
 	yield takeEvery(ADVERTISEMENT_FETCH, advertisementFetchSaga);
+	yield takeEvery(ADVERTISEMENTS_LIST_FETCH, advertisementsListFetchSaga);
 }
 
 
