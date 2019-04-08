@@ -20,7 +20,7 @@ class ViewAdvertisement extends Component {
 	}
 	render() {
 		const { advertisementViewStatus, advertisement } = this.props;
-		console.log(advertisementViewStatus);
+
 		return (
 			<div id="wrapper">
 				{/* Sidebar */}

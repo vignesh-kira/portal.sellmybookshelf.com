@@ -1,21 +1,67 @@
 import React, {Component} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook } from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
+import {withCookies} from "react-cookie";
+import {connect} from "react-redux";
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'
 import Footer  from '../../Shared/Footer'
-import {withCookies} from "react-cookie";
-import {connect} from "react-redux";
 import {advertisementsListFetch} from "../../../actions/portal";
-import {API_SUCCESS} from "../../../constants/common";
-import "../../../styled/common.css";
 import book from "../../../images/book.png";
 
 class ListAdvertisement extends Component {
 	componentDidMount() {
 		this.props.advertisementsListFetch();
 	}
+
+	advertisementItemUI = (advertisement) => {
+		// {class,subject,advertisementStatus,book_final_price}
+
+		return (
+			<div className="row advertisementWrapper">
+				<div className="card col-md-12 no-padding">
+					<div
+						className="card-body"
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'space-between'
+						}}>
+						<div style={{display: 'flex'}}>
+							<img
+								src={book} width='100' height='100'
+								style={{marginTop: '-10px'}}
+							/>
+							<div>
+								<h5 className="card-title">&#8377; {advertisement.book_final_price}</h5>
+								<p className="card-text">
+									{advertisement.class.name} Class
+									<br />
+									{advertisement.subject.name} Book
+									<br />
+									<span className="badge badge-pill badge-primary">{advertisement.advertisementStatus.name}</span>
+								</p>
+							</div>
+						</div>
+						<Link to={`/advertisement/view/${advertisement.id}`}
+							style={{alignSelf: 'center'}}
+							className="btn btn-primary btn-lg"
+						>
+							View
+						</Link>
+					</div>
+				</div>
+			</div>
+		)
+	};
+
+	populateAdvertisementItems = () =>{
+		const {advertisementsList} = this.props;
+		return advertisementsList.map( advertisement =>{
+			return this.advertisementItemUI(advertisement);
+		});
+	};
+
 	render() {
 		const { advertisementsListFetchStatus, advertisementsList } = this.props;
 
@@ -49,78 +95,11 @@ class ListAdvertisement extends Component {
 							     }}>
 								{/* Books Count Section */}
 								<div className="row">
-									<h6 className="text-left">1 to 10 of 100 books are listed.</h6>
+									<h6 className="text-left">{advertisementsList.length} books are listed.</h6>
 								</div>
 
 								{/* Books Advertisement Section */}
-								<div className="row advertisementWrapper">
-									<div className="card col-md-12 no-padding">
-										<div
-											className="card-body"
-											style={{
-												display: 'flex',
-												flexDirection: 'row',
-												justifyContent: 'space-between'
-											}}>
-											<div style={{display: 'flex'}}>
-												<img
-													src={book} width='100' height='100'
-													style={{marginTop: '-10px'}}
-												/>
-												<div>
-													<h5 className="card-title">&#8377; 320</h5>
-													<p className="card-text">
-														10th Class
-														<br />
-														Science Book
-														<br />
-														<span className="badge badge-pill badge-primary">Available</span>
-													</p>
-												</div>
-											</div>
-											<button
-												style={{alignSelf: 'center'}}
-												className="btn btn-primary"
-											>
-												View
-											</button>
-										</div>
-									</div>
-								</div>
-								<div className="row advertisementWrapper">
-									<div className="card col-md-12 no-padding">
-										<div
-											className="card-body"
-											style={{
-												display: 'flex',
-												flexDirection: 'row',
-												justifyContent: 'space-between'
-											}}>
-											<div style={{display: 'flex'}}>
-												<img
-													src={book} width='100' height='100'
-													style={{marginTop: '-10px'}}
-												/>
-												<div>
-													<h5 className="card-title">&#8377; 320</h5>
-													<p className="card-text">
-														10th Class
-														<br />
-														Science Book
-														<br />
-														<span className="badge badge-pill badge-primary">Available</span>
-													</p>
-												</div>
-											</div>
-											<button
-												style={{alignSelf: 'center'}}
-												className="btn btn-primary"
-											>
-												View
-											</button>
-										</div>
-									</div>
-								</div>
+								{this.populateAdvertisementItems()}
 
 								{/* Pagination Section */}
 								<div className="row">

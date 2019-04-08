@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import * as yup from "yup";
 import {connect} from "react-redux";
 import {withCookies} from "react-cookie";
+import Rating from "react-rating";
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'
@@ -38,7 +39,7 @@ class CreateAdvertisement extends Component {
 			book_title: yup.string().required('Book Title is required'),
 			book_author: yup.string().required('Book Author is required'),
 			condition_text: yup.string().required('Condition Text is required'),
-			condition_rating: yup.number().min(1, 'Minimum is 1').max(10, 'Maximum is 10').required('Condition Rating is required'),
+			condition_rating: yup.number().min(1, 'Minimum is 1').max(5, 'Maximum is 5').required('Condition Rating is required'),
 			book_seller_price: yup.number().required('Book Seller Price is required'),
 			book_final_price: yup.string()
 		});
