@@ -73,11 +73,11 @@ class SideNav extends Component {
 						</Link>
 					</li>
 					<li className="nav-item">
-						<Link className="nav-link" to="/advertisement/edit">
+						<Link className="nav-link" to="/advertisement/my">
 							<i>
 								<FontAwesomeIcon icon={faEdit}/>
 							</i>
-							<span>Edit</span>
+							<span>My Ads</span>
 						</Link>
 					</li>
 
