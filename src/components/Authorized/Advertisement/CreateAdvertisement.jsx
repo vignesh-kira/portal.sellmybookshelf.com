@@ -258,11 +258,11 @@ class CreateAdvertisement extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-	classes: state.login.classes,
-	subjects: state.login.subjects,
-	user: state.login.user,
+	classes: state.common.classes,
+	subjects: state.common.subjects,
+	user: state.common.user,
 	cookies: ownProps.cookies,
-	advertisementCreateStatus: state.login.advertisementCreateStatus
+	advertisementCreateStatus: state.advertisement.advertisementCreateStatus
 });
 
 const mapDispatchToProps = {

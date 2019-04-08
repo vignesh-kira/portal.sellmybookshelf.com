@@ -222,10 +222,10 @@ class Register extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-	classes: state.login.classes,
-	sections: state.login.sections,
-	user: state.login.user,
-	registerUserStatus: state.login.registerUserStatus,
+	classes: state.common.classes,
+	sections: state.common.sections,
+	user: state.common.user,
+	registerUserStatus: state.common.registerUserStatus,
 	cookies: ownProps.cookies
 });
 

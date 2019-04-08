@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
-import login from './portal';
+import common from './common';
+import advertisement from './advertisement';
+import profile from './profile';
 
 export default combineReducers({
-	login
+	common,
+	advertisement,
+	profile
 });

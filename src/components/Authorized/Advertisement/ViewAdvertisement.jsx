@@ -63,8 +63,8 @@ class ViewAdvertisement extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
 	cookies: ownProps.cookies,
-	advertisement: state.login.advertisement,
-	advertisementViewStatus: state.login.advertisementViewStatus
+	advertisement: state.advertisement.advertisement,
+	advertisementViewStatus: state.advertisement.advertisementViewStatus
 });
 
 const mapDispatchToProps = {

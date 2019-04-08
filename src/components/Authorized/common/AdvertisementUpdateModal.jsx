@@ -51,7 +51,7 @@ class AdvertisementUpdateModal extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	advertisementUpdateStatus: state.login.advertisementUpdateStatus
+	advertisementUpdateStatus: state.advertisement.advertisementUpdateStatus
 });
 
 // const mapDispatchToProps = {

@@ -125,10 +125,10 @@ class ListAdvertisement extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-	user: state.login.user,
+	user: state.common.user,
 	cookies: ownProps.cookies,
-	advertisementsList: state.login.advertisementsList,
-	advertisementsListFetchStatus: state.login.advertisementsListFetchStatus
+	advertisementsList: state.advertisement.advertisementsList,
+	advertisementsListFetchStatus: state.advertisement.advertisementsListFetchStatus
 });
 
 const mapDispatchToProps = {

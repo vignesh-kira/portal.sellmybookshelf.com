@@ -313,13 +313,13 @@ class EditAdvertisement extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-	classes: state.login.classes,
-	subjects: state.login.subjects,
-	user: state.login.user,
+	classes: state.common.classes,
+	subjects: state.common.subjects,
+	user: state.common.user,
 	cookies: ownProps.cookies,
-	advertisement: state.login.advertisement,
-	advertisementUpdateStatus: state.login.advertisementUpdateStatus,
-	advertisementFetchStatus: state.login.advertisementFetchStatus
+	advertisement: state.advertisement.advertisement,
+	advertisementUpdateStatus: state.advertisement.advertisementUpdateStatus,
+	advertisementFetchStatus: state.advertisement.advertisementFetchStatus
 });
 
 const mapDispatchToProps = {

@@ -56,7 +56,7 @@ class MessageModal extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	advertisementCreateStatus: state.login.advertisementCreateStatus
+	advertisementCreateStatus: state.advertisement.advertisementCreateStatus
 });
 
 // const mapDispatchToProps = {

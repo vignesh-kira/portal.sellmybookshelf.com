@@ -121,7 +121,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-	login: state.login,
+	login: state.common,
 	cookies: ownProps.cookies
 });
 
