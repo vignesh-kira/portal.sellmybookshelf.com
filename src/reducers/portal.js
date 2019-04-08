@@ -26,7 +26,10 @@ import {
 	ADVERTISEMENT_FETCH_ERROR,
 	ADVERTISEMENTS_LIST_FETCH,
 	ADVERTISEMENTS_LIST_FETCH_SUCCESS,
-	ADVERTISEMENTS_LIST_FETCH_ERROR
+	ADVERTISEMENTS_LIST_FETCH_ERROR,
+	ADVERTISEMENT_VIEW,
+	ADVERTISEMENT_VIEW_SUCCESS,
+	ADVERTISEMENT_VIEW_ERROR,
 } from '../constants/action-types';
 import {
 	API_SUCCESS,
@@ -150,6 +153,32 @@ export default handleActions({
 	[ADVERTISEMENTS_LIST_FETCH_ERROR]: (state) => ({
 		...state,
 		advertisementsListFetchStatus: API_ERROR
+	}),
+	[ADVERTISEMENTS_LIST_FETCH]: (state) => ({
+		...state,
+		advertisementsListFetchStatus: ''
+	}),
+	[ADVERTISEMENTS_LIST_FETCH_SUCCESS]: (state, { payload }) => ({
+		...state,
+		advertisementsListFetchStatus: API_SUCCESS,
+		advertisementsList: payload
+	}),
+	[ADVERTISEMENTS_LIST_FETCH_ERROR]: (state) => ({
+		...state,
+		advertisementsListFetchStatus: API_ERROR
+	}),
+	[ADVERTISEMENT_VIEW]: (state) => ({
+		...state,
+		advertisementViewStatus: ''
+	}),
+	[ADVERTISEMENT_VIEW_SUCCESS]: (state, { payload }) => ({
+		...state,
+		advertisementViewStatus: API_SUCCESS,
+		advertisement: payload
+	}),
+	[ADVERTISEMENT_VIEW_ERROR]: (state) => ({
+		...state,
+		advertisementViewStatus: API_ERROR
 	})
 }, {
 	user: {},
@@ -166,5 +195,6 @@ export default handleActions({
 	advertisementUpdateStatus: '',
 	advertisementFetchStatus: '',
 	advertisementsList: [],
-	advertisementsListFetchStatus: ''
+	advertisementsListFetchStatus: '',
+	advertisementViewStatus: '',
 });

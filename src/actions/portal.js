@@ -36,3 +36,7 @@ export const advertisementUpdateError = createAction(actions.ADVERTISEMENT_UPDAT
 export const advertisementsListFetch = createAction(actions.ADVERTISEMENTS_LIST_FETCH);
 export const advertisementsListFetchSuccess = createAction(actions.ADVERTISEMENTS_LIST_FETCH_SUCCESS);
 export const advertisementsListFetchError = createAction(actions.ADVERTISEMENTS_LIST_FETCH_ERROR);
+
+export const advertisementView = createAction(actions.ADVERTISEMENT_VIEW);
+export const advertisementViewSuccess = createAction(actions.ADVERTISEMENT_VIEW_SUCCESS);
+export const advertisementViewError = createAction(actions.ADVERTISEMENT_VIEW_ERROR);

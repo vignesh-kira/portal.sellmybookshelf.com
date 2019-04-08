@@ -32,7 +32,7 @@ class EditAdvertisement extends Component {
 	}
 
 	handleFormSubmit = (entity) => {
-		const {cookies, advertisementUpdate, match: { params : {id} }} = this.props;
+		const {advertisementUpdate, match: { params : {id} }} = this.props;
 
 		advertisementUpdate({entity, id});
 	};

@@ -2,7 +2,6 @@ import fetchJson from '../custom-lib/fetch-json';
 import md5 from "md5";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
-console.log(process.env);
 
 export function fetchUser({payload}) {
 	let entity = Object.assign({}, payload);
@@ -69,6 +68,12 @@ export function advertisementUpdate({payload : {entity, id}}) {
 
 export function advertisementsListFetch() {
 	return fetchJson(`${BASE_URL}/advertisements`, {
+		method: 'GET'
+	});
+}
+
+export function advertisementView({payload : {id}}) {
+	return fetchJson(`${BASE_URL}/advertisements/view/${id}`, {
 		method: 'GET'
 	});
 }

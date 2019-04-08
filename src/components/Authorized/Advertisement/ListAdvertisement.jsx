@@ -53,7 +53,41 @@ class ListAdvertisement extends Component {
 								</div>
 
 								{/* Books Advertisement Section */}
-								<div className="row">
+								<div className="row advertisementWrapper">
+									<div className="card col-md-12 no-padding">
+										<div
+											className="card-body"
+											style={{
+												display: 'flex',
+												flexDirection: 'row',
+												justifyContent: 'space-between'
+											}}>
+											<div style={{display: 'flex'}}>
+												<img
+													src={book} width='100' height='100'
+													style={{marginTop: '-10px'}}
+												/>
+												<div>
+													<h5 className="card-title">&#8377; 320</h5>
+													<p className="card-text">
+														10th Class
+														<br />
+														Science Book
+														<br />
+														<span className="badge badge-pill badge-primary">Available</span>
+													</p>
+												</div>
+											</div>
+											<button
+												style={{alignSelf: 'center'}}
+												className="btn btn-primary"
+											>
+												View
+											</button>
+										</div>
+									</div>
+								</div>
+								<div className="row advertisementWrapper">
 									<div className="card col-md-12 no-padding">
 										<div
 											className="card-body"
