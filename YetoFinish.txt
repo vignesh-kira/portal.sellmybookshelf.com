@@ -8,3 +8,17 @@ LeftNav collapse
 ENV file
 Logout page
 OPTIONS refused to connect in chrome
+
+
+
+------------
+NOW:
+Fix Pop ups not working
+Advertisement View
+Change Edit to My advertisement
+change login using email to phone
+Fix logout issue
+Profile page fix
+Forgot password needed.
+Emails needed
+Bazaar books bought filed tobe added to Users

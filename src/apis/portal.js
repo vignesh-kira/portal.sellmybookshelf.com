@@ -79,13 +79,14 @@ export function advertisementView({payload : {id}}) {
 }
 
 export function profileFetch({payload : {id}}) {
-	return fetchJson(`${BASE_URL}/profile/${id}`, {
+	return fetchJson(`${BASE_URL}/users/${id}`, {
 		method: 'GET'
 	});
 }
 
 export function profileUpdate({payload : {entity, id}}) {
-	return fetchJson(`${BASE_URL}/profile/update/${id}`, {
-		method: 'PUT'
+	return fetchJson(`${BASE_URL}/users/update/${id}`, {
+		method: 'PUT',
+		entity
 	});
 }
