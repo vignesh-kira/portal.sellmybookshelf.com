@@ -9,7 +9,9 @@ import {
 	advertisementUpdate,
 	advertisementFetch,
 	advertisementsListFetch,
-	advertisementView
+	advertisementView,
+	profileFetch,
+	profileUpdate
 } from '../apis/portal';
 import {
 	fetchUserSuccess,
@@ -31,7 +33,11 @@ import {
 	advertisementsListFetchSuccess,
 	advertisementsListFetchError,
 	advertisementViewSuccess,
-	advertisementViewError
+	advertisementViewError,
+	profileFetchSuccess,
+	profileFetchError,
+	profileUpdateSuccess,
+	profileUpdateError
 } from '../actions/portal';
 import {
 	FETCH_CLASSES,
@@ -43,7 +49,9 @@ import {
 	ADVERTISEMENT_UPDATE,
 	ADVERTISEMENT_FETCH,
 	ADVERTISEMENTS_LIST_FETCH,
-	ADVERTISEMENT_VIEW
+	ADVERTISEMENT_VIEW,
+	PROFILE_FETCH,
+	PROFILE_UPDATE
 } from '../constants/action-types';
 
 export function* fetchUserSaga(payload) {
@@ -180,10 +188,33 @@ export function* advertisementViewSaga(payload) {
 	}
 }
 
-/*
-  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
-  Allows concurrent fetches of user.
-*/
+
+export function* profileFetchSaga(payload) {
+	try {
+		const result = yield call(profileFetch, payload);
+		if(!result.error){
+			yield put(profileFetchSuccess(result.data));
+		}else{
+			yield put(profileFetchError());
+		}
+	} catch (e) {
+		yield put(profileFetchError());
+	}
+}
+
+export function* profileUpdateSaga(payload) {
+	try {
+		const result = yield call(profileUpdate, payload);
+		if(!result.error){
+			yield put(profileUpdateSuccess(result.data));
+		}else{
+			yield put(profileUpdateError());
+		}
+	} catch (e) {
+		yield put(profileUpdateError());
+	}
+}
+
 function* mySaga() {
 	yield takeEvery(FETCH_USER, fetchUserSaga);
 	yield takeEvery(FETCH_CLASSES, fetchClassesSaga);
@@ -195,7 +226,8 @@ function* mySaga() {
 	yield takeEvery(ADVERTISEMENT_FETCH, advertisementFetchSaga);
 	yield takeEvery(ADVERTISEMENTS_LIST_FETCH, advertisementsListFetchSaga);
 	yield takeEvery(ADVERTISEMENT_VIEW, advertisementViewSaga);
+	yield takeEvery(PROFILE_FETCH, profileFetchSaga);
+	yield takeEvery(PROFILE_UPDATE, profileUpdateSaga);
 }
-
 
 export default mySaga;

@@ -30,6 +30,12 @@ import {
 	ADVERTISEMENT_VIEW,
 	ADVERTISEMENT_VIEW_SUCCESS,
 	ADVERTISEMENT_VIEW_ERROR,
+	PROFILE_FETCH,
+	PROFILE_FETCH_SUCCESS,
+	PROFILE_FETCH_ERROR,
+	PROFILE_UPDATE,
+	PROFILE_UPDATE_SUCCESS,
+	PROFILE_UPDATE_ERROR
 } from '../constants/action-types';
 import {
 	API_SUCCESS,
@@ -154,19 +160,6 @@ export default handleActions({
 		...state,
 		advertisementsListFetchStatus: API_ERROR
 	}),
-	[ADVERTISEMENTS_LIST_FETCH]: (state) => ({
-		...state,
-		advertisementsListFetchStatus: ''
-	}),
-	[ADVERTISEMENTS_LIST_FETCH_SUCCESS]: (state, { payload }) => ({
-		...state,
-		advertisementsListFetchStatus: API_SUCCESS,
-		advertisementsList: payload
-	}),
-	[ADVERTISEMENTS_LIST_FETCH_ERROR]: (state) => ({
-		...state,
-		advertisementsListFetchStatus: API_ERROR
-	}),
 	[ADVERTISEMENT_VIEW]: (state) => ({
 		...state,
 		advertisementViewStatus: ''
@@ -179,6 +172,32 @@ export default handleActions({
 	[ADVERTISEMENT_VIEW_ERROR]: (state) => ({
 		...state,
 		advertisementViewStatus: API_ERROR
+	}),
+	[PROFILE_FETCH]: (state) => ({
+		...state,
+		profileFetchStatus: ''
+	}),
+	[PROFILE_FETCH_SUCCESS]: (state, { payload }) => ({
+		...state,
+		profileFetchStatus: API_SUCCESS,
+		profile: payload
+	}),
+	[PROFILE_FETCH_ERROR]: (state) => ({
+		...state,
+		profileFetchStatus: API_ERROR
+	}),
+	[PROFILE_UPDATE]: (state) => ({
+		...state,
+		profileUpdateStatus: ''
+	}),
+	[PROFILE_UPDATE_SUCCESS]: (state, { payload }) => ({
+		...state,
+		profileUpdateStatus: API_SUCCESS,
+		profile: payload
+	}),
+	[PROFILE_UPDATE_ERROR]: (state) => ({
+		...state,
+		profileUpdateStatus: API_ERROR
 	})
 }, {
 	user: {},
@@ -197,4 +216,7 @@ export default handleActions({
 	advertisementsList: [],
 	advertisementsListFetchStatus: '',
 	advertisementViewStatus: '',
+	profile:{},
+	profileFetchStatus: '',
+	profileUpdateStatus: '',
 });

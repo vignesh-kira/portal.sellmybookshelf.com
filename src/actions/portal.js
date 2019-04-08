@@ -40,3 +40,11 @@ export const advertisementsListFetchError = createAction(actions.ADVERTISEMENTS_
 export const advertisementView = createAction(actions.ADVERTISEMENT_VIEW);
 export const advertisementViewSuccess = createAction(actions.ADVERTISEMENT_VIEW_SUCCESS);
 export const advertisementViewError = createAction(actions.ADVERTISEMENT_VIEW_ERROR);
+
+export const profileFetch = createAction(actions.PROFILE_FETCH);
+export const profileFetchSuccess = createAction(actions.PROFILE_FETCH_SUCCESS);
+export const profileFetchError = createAction(actions.PROFILE_FETCH_ERROR);
+
+export const profileUpdate = createAction(actions.PROFILE_UPDATE);
+export const profileUpdateSuccess = createAction(actions.PROFILE_UPDATE_SUCCESS);
+export const profileUpdateError = createAction(actions.PROFILE_UPDATE_ERROR);
