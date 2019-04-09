@@ -5,7 +5,8 @@ import {
 	PROFILE_FETCH_ERROR,
 	PROFILE_UPDATE,
 	PROFILE_UPDATE_SUCCESS,
-	PROFILE_UPDATE_ERROR
+	PROFILE_UPDATE_ERROR,
+	GLOBAL_ALERT_TURN_OFF
 } from '../constants/action-types';
 import {
 	API_SUCCESS,
@@ -33,14 +34,20 @@ export default handleActions({
 	[PROFILE_UPDATE_SUCCESS]: (state, { payload }) => ({
 		...state,
 		profileUpdateStatus: API_SUCCESS,
-		profile: payload
+		profile: payload,
+		profileAlert: true
 	}),
 	[PROFILE_UPDATE_ERROR]: (state) => ({
 		...state,
 		profileUpdateStatus: API_ERROR
+	}),
+	[GLOBAL_ALERT_TURN_OFF]: (state) => ({
+		...state,
+		profileAlert: false
 	})
 }, {
 	profile:{},
 	profileFetchStatus: '',
 	profileUpdateStatus: '',
+	profileAlert: false
 });

@@ -52,3 +52,6 @@ export const profileUpdateError = createAction(actions.PROFILE_UPDATE_ERROR);
 export const advertisementFetchMyads = createAction(actions.ADVERTISEMENT_FETCH_MYADS);
 export const advertisementFetchMyadsSuccess = createAction(actions.ADVERTISEMENT_FETCH_MYADS_SUCCESS);
 export const advertisementFetchMyadsError = createAction(actions.ADVERTISEMENT_FETCH_MYADS_ERROR);
+
+export const globalAlertTurnOff = createAction(actions.GLOBAL_ALERT_TURN_OFF);
+

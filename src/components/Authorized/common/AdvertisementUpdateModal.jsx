@@ -4,6 +4,7 @@ import {withCookies} from "react-cookie";
 import {connect} from "react-redux";
 import {API_SUCCESS} from "../../../constants/common";
 import { withRouter } from 'react-router-dom';
+import {globalAlertTurnOff} from "../../../actions/portal";
 
 class AdvertisementUpdateModal extends React.Component {
 	constructor(props) {
@@ -14,8 +15,10 @@ class AdvertisementUpdateModal extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const {advertisementUpdateStatus} = this.props;
-		if(prevProps.advertisementUpdateStatus !==  advertisementUpdateStatus){
+		const {advertisementUpdateStatus, advertisementAlert} = this.props;
+
+		if(advertisementUpdateStatus === API_SUCCESS && advertisementAlert){
+			this.props.globalAlertTurnOff();
 			this.toggle();
 		}
 	}
@@ -51,11 +54,12 @@ class AdvertisementUpdateModal extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	advertisementUpdateStatus: state.advertisement.advertisementUpdateStatus
+	advertisementUpdateStatus: state.advertisement.advertisementUpdateStatus,
+	advertisementAlert: state.advertisement.advertisementAlert
 });
 
-// const mapDispatchToProps = {
-// 	fetchClasses
-// };
+const mapDispatchToProps = {
+	globalAlertTurnOff
+};
 
-export default withCookies(withRouter(connect(mapStateToProps)(AdvertisementUpdateModal)));
+export default withCookies(withRouter(connect(mapStateToProps, mapDispatchToProps)(AdvertisementUpdateModal)));

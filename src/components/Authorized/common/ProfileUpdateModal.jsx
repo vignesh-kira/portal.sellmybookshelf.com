@@ -4,6 +4,7 @@ import {withCookies} from "react-cookie";
 import {connect} from "react-redux";
 import {API_SUCCESS} from "../../../constants/common";
 import { withRouter } from 'react-router-dom';
+import {globalAlertTurnOff} from "../../../actions/portal";
 
 class ProfileUpdateModal extends React.Component {
 	constructor(props) {
@@ -14,8 +15,10 @@ class ProfileUpdateModal extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const {profileUpdateStatus} = this.props;
-		if(prevProps.profileUpdateStatus !==  profileUpdateStatus){
+		const {profileUpdateStatus, profileAlert} = this.props;
+
+		if(profileUpdateStatus === API_SUCCESS && profileAlert){
+			this.props.globalAlertTurnOff();
 			this.toggle();
 		}
 	}
@@ -51,8 +54,12 @@ class ProfileUpdateModal extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	profileUpdateStatus: state.profile.profileUpdateStatus
+	profileUpdateStatus: state.profile.profileUpdateStatus,
+	profileAlert: state.profile.profileAlert
 });
 
+const mapDispatchToProps = {
+	globalAlertTurnOff
+};
 
-export default withCookies(withRouter(connect(mapStateToProps)(ProfileUpdateModal)));
+export default withCookies(withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileUpdateModal)));

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import {Link} from "react-router-dom";
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'
@@ -37,11 +38,10 @@ const MainDashboard = (props) => (
 								<div className="card-body">
 									<div className="row no-gutters align-items-center">
 										<div className="col mr-2">
-											<div
-												className="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings
-												(Monthly)
+											<div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												BOOKS BOUGHT
 											</div>
-											<div className="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+											<div className="h5 mb-0 font-weight-bold text-gray-800">5</div>
 										</div>
 										<div className="col-auto">
 											<i className="fa fa-calendar fa-2x text-gray-300"></i>
@@ -57,11 +57,10 @@ const MainDashboard = (props) => (
 								<div className="card-body">
 									<div className="row no-gutters align-items-center">
 										<div className="col mr-2">
-											<div
-												className="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings
-												(Annual)
+											<div className="text-xs font-weight-bold text-success text-uppercase mb-1">
+												BOOKS SOLD
 											</div>
-											<div className="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+											<div className="h5 mb-0 font-weight-bold text-gray-800">5</div>
 										</div>
 										<div className="col-auto">
 											<i className="fa fa-comments fa-2x text-gray-300"></i>
@@ -77,10 +76,10 @@ const MainDashboard = (props) => (
 									<div className="row no-gutters align-items-center">
 										<div className="col mr-2">
 											<div
-												className="text-xs font-weight-bold text-info text-uppercase mb-1">Earnings
-												(Monthly)
+												className="text-xs font-weight-bold text-info text-uppercase mb-1">
+												My Advertisements
 											</div>
-											<div className="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+											<div className="h5 mb-0 font-weight-bold text-gray-800">5</div>
 										</div>
 										<div className="col-auto">
 											<i className="fa fa-comments fa-2x text-gray-300"></i>
@@ -96,11 +95,10 @@ const MainDashboard = (props) => (
 								<div className="card-body">
 									<div className="row no-gutters align-items-center">
 										<div className="col mr-2">
-											<div
-												className="text-xs font-weight-bold text-warning text-uppercase mb-1">Earnings
-												(Annual)
+											<div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
+												Total Earnings
 											</div>
-											<div className="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+											<div className="h5 mb-0 font-weight-bold text-gray-800">&#8377; 100</div>
 										</div>
 										<div className="col-auto">
 											<i className="fa fa-comments fa-2x text-gray-300"></i>
@@ -120,14 +118,14 @@ const MainDashboard = (props) => (
 							{/* Color System */}
 							<div className="row">
 								<div className="col-lg-6 mb-4">
-									<a href="#" className="btn btn-danger btn-lg btn-icon-split" style={{padding: '20px 100px'}}>
+									<Link to="/advertisement/list" className="btn btn-danger btn-lg btn-icon-split" style={{padding: '20px 100px'}}>
 										<span className="text">Buy A Book</span>
-									</a>
+									</Link>
 								</div>
 								<div className="col-lg-6 mb-4">
-									<a href="#" className="btn btn-success btn-lg btn-icon-split" style={{padding: '20px 100px'}}>
+									<Link to="/advertisement/create" className="btn btn-success btn-lg btn-icon-split" style={{padding: '20px 100px'}}>
 										<span className="text">Sell A Book</span>
-									</a>
+									</Link>
 								</div>
 							</div>
 
@@ -145,10 +143,11 @@ const MainDashboard = (props) => (
 										<span>Notification</span>
 									</h6>
 								</div>
-								<ul className="text-left" style={{paddingLeft: '10px;'}}>
-									<li>Your book has been reserved by 8th Class student</li>
-									<li>Your book has was bought by 8th Class student</li>
-								</ul>
+								<p>You will receive new notifications here</p>
+								{/*<ul className="text-left" style={{paddingLeft: '10px;'}}>*/}
+									{/*<li>Your book has been reserved by 8th Class student</li>*/}
+									{/*<li>Your book has was bought by 8th Class student</li>*/}
+								{/*</ul>*/}
 							</div>
 
 						</div>
@@ -159,7 +158,7 @@ const MainDashboard = (props) => (
 			{/* End of Main Content */}
 
 			{/* Footer */}
-			Footer
+			<Footer />
 			{/* End of Footer */}
 
 		</div>
