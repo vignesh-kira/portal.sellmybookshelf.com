@@ -49,6 +49,11 @@ export function advertisementFetch({payload : {entity, id}}) {
 	});
 }
 
+export function advertisementFetchMyads({payload : {id}}) {
+	return fetchJson(`${BASE_URL}/advertisements/myads/${id}`, {
+		method: 'GET'
+	});
+}
 
 export function advertisementCreate({payload}) {
 

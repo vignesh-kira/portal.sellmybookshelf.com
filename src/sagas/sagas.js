@@ -11,7 +11,8 @@ import {
 	advertisementsListFetch,
 	advertisementView,
 	profileFetch,
-	profileUpdate
+	profileUpdate,
+	advertisementFetchMyads
 } from '../apis/portal';
 import {
 	fetchUserSuccess,
@@ -37,7 +38,9 @@ import {
 	profileFetchSuccess,
 	profileFetchError,
 	profileUpdateSuccess,
-	profileUpdateError
+	profileUpdateError,
+	advertisementFetchMyadsSuccess,
+	advertisementFetchMyadsError
 } from '../actions/portal';
 import {
 	FETCH_CLASSES,
@@ -51,7 +54,8 @@ import {
 	ADVERTISEMENTS_LIST_FETCH,
 	ADVERTISEMENT_VIEW,
 	PROFILE_FETCH,
-	PROFILE_UPDATE
+	PROFILE_UPDATE,
+	ADVERTISEMENT_FETCH_MYADS
 } from '../constants/action-types';
 
 export function* fetchUserSaga(payload) {
@@ -215,6 +219,19 @@ export function* profileUpdateSaga(payload) {
 	}
 }
 
+export function* advertisementFetchMyadsSaga(payload) {
+	try {
+		const result = yield call(advertisementFetchMyads, payload);
+		if(!result.error){
+			yield put(advertisementFetchMyadsSuccess(result.data));
+		}else{
+			yield put(advertisementFetchMyadsError());
+		}
+	} catch (e) {
+		yield put(advertisementFetchMyadsError());
+	}
+}
+
 function* mySaga() {
 	yield takeEvery(FETCH_USER, fetchUserSaga);
 	yield takeEvery(FETCH_CLASSES, fetchClassesSaga);
@@ -228,6 +245,7 @@ function* mySaga() {
 	yield takeEvery(ADVERTISEMENT_VIEW, advertisementViewSaga);
 	yield takeEvery(PROFILE_FETCH, profileFetchSaga);
 	yield takeEvery(PROFILE_UPDATE, profileUpdateSaga);
+	yield takeEvery(ADVERTISEMENT_FETCH_MYADS, advertisementFetchMyadsSaga);
 }
 
 export default mySaga;

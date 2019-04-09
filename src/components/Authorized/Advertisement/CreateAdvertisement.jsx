@@ -182,7 +182,7 @@ class CreateAdvertisement extends Component {
 														{errors.condition_text && touched.condition_text && <div className="invalid-feedback">{errors.condition_text}</div>}
 													</div>
 													<div className="col-sm-6 text-left">
-														<label>Condition Rating (Out of 10):</label>
+														<label>Condition Rating (Out of 5):</label>
 														<input type="number"
 														       className={`form-control ${errors.condition_rating && touched.condition_rating && 'is-invalid'}`}
 														       id="condition_rating"

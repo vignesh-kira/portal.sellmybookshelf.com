@@ -48,3 +48,7 @@ export const profileFetchError = createAction(actions.PROFILE_FETCH_ERROR);
 export const profileUpdate = createAction(actions.PROFILE_UPDATE);
 export const profileUpdateSuccess = createAction(actions.PROFILE_UPDATE_SUCCESS);
 export const profileUpdateError = createAction(actions.PROFILE_UPDATE_ERROR);
+
+export const advertisementFetchMyads = createAction(actions.ADVERTISEMENT_FETCH_MYADS);
+export const advertisementFetchMyadsSuccess = createAction(actions.ADVERTISEMENT_FETCH_MYADS_SUCCESS);
+export const advertisementFetchMyadsError = createAction(actions.ADVERTISEMENT_FETCH_MYADS_ERROR);

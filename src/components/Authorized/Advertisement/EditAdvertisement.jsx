@@ -59,7 +59,7 @@ class EditAdvertisement extends Component {
 			book_title: yup.string().required('Book Title is required'),
 			book_author: yup.string().required('Book Author is required'),
 			condition_text: yup.string().required('Condition Text is required'),
-			condition_rating: yup.number().min(1, 'Minimum is 1').max(10, 'Maximum is 10').required('Condition Rating is required'),
+			condition_rating: yup.number().min(1, 'Minimum is 1').max(5, 'Maximum is 5').required('Condition Rating is required'),
 			book_seller_price: yup.number().required('Book Seller Price is required'),
 			book_final_price: yup.string()
 		});
@@ -222,7 +222,7 @@ class EditAdvertisement extends Component {
 																	className="invalid-feedback">{errors.condition_text}</div>}
 															</div>
 															<div className="col-sm-6 text-left">
-																<label>Condition Rating (Out of 10):</label>
+																<label>Condition Rating (Out of 5):</label>
 																<input type="number"
 																       className={`form-control ${errors.condition_rating && touched.condition_rating && 'is-invalid'}`}
 																       id="condition_rating"

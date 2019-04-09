@@ -14,7 +14,10 @@ import {
 	ADVERTISEMENTS_LIST_FETCH_ERROR,
 	ADVERTISEMENT_VIEW,
 	ADVERTISEMENT_VIEW_SUCCESS,
-	ADVERTISEMENT_VIEW_ERROR
+	ADVERTISEMENT_VIEW_ERROR,
+	ADVERTISEMENT_FETCH_MYADS,
+	ADVERTISEMENT_FETCH_MYADS_SUCCESS,
+	ADVERTISEMENT_FETCH_MYADS_ERROR
 } from '../constants/action-types';
 import {
 	API_SUCCESS,
@@ -86,7 +89,21 @@ export default handleActions({
 	[ADVERTISEMENT_VIEW_ERROR]: (state) => ({
 		...state,
 		advertisementViewStatus: API_ERROR
-	})
+	}),
+	[ADVERTISEMENT_FETCH_MYADS]: (state) => ({
+		...state,
+		advertisementMyadsFetchStatus: ''
+	}),
+	[ADVERTISEMENT_FETCH_MYADS_SUCCESS]: (state, { payload }) => ({
+		...state,
+		advertisementMyadsFetchStatus: API_SUCCESS,
+		advertisementMyads: payload
+	}),
+	[ADVERTISEMENT_FETCH_MYADS_ERROR]: (state, { payload }) => ({
+		...state,
+		advertisementMyadsFetchStatus: API_ERROR,
+		advertisement: payload
+	}),
 }, {
 	advertisement: {},
 	advertisementCreateStatus: '',
@@ -94,5 +111,7 @@ export default handleActions({
 	advertisementFetchStatus: '',
 	advertisementsList: [],
 	advertisementsListFetchStatus: '',
-	advertisementViewStatus: ''
+	advertisementViewStatus: '',
+	advertisementMyads: [],
+	advertisementMyadsFetchStatus: ''
 });

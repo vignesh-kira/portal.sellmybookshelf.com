@@ -6,12 +6,14 @@ import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'
 import Footer  from '../../Shared/Footer'
-import {advertisementsListFetch} from "../../../actions/portal";
+import {advertisementFetchMyads} from "../../../actions/portal";
 import book from "../../../images/book.png";
 
 class MyAdvertisement extends Component {
 	componentDidMount() {
-		this.props.advertisementsListFetch();
+		const { cookies } = this.props;
+		const {id} = cookies.get('user');
+		this.props.advertisementFetchMyads({id});
 	}
 
 	advertisementItemUI = (advertisement) => {
@@ -43,11 +45,11 @@ class MyAdvertisement extends Component {
 								</p>
 							</div>
 						</div>
-						<Link to={`/advertisement/view/${advertisement.id}`}
+						<Link to={`/advertisement/edit/${advertisement.id}`}
 							style={{alignSelf: 'center'}}
 							className="btn btn-primary btn-lg"
 						>
-							View
+							Edit
 						</Link>
 					</div>
 				</div>
@@ -56,14 +58,14 @@ class MyAdvertisement extends Component {
 	};
 
 	populateAdvertisementItems = () =>{
-		const {advertisementsList} = this.props;
-		return advertisementsList.map( advertisement =>{
+		const {advertisementMyads} = this.props;
+		return advertisementMyads.map( advertisement =>{
 			return this.advertisementItemUI(advertisement);
 		});
 	};
 
 	render() {
-		const { advertisementsListFetchStatus, advertisementsList } = this.props;
+		const { advertisementMyadsFetchStatus, advertisementMyads } = this.props;
 
 		return (
 			<div id="wrapper">
@@ -95,7 +97,7 @@ class MyAdvertisement extends Component {
 							     }}>
 								{/* Books Count Section */}
 								<div className="row">
-									<h6 className="text-left">{advertisementsList.length} books are listed.</h6>
+									<h6 className="text-left">{advertisementMyads.length} books are listed.</h6>
 								</div>
 
 								{/* Books Advertisement Section */}
@@ -127,12 +129,12 @@ class MyAdvertisement extends Component {
 const mapStateToProps = (state, ownProps) => ({
 	user: state.common.user,
 	cookies: ownProps.cookies,
-	advertisementsList: state.advertisement.advertisementsList,
-	advertisementsListFetchStatus: state.advertisement.advertisementsListFetchStatus
+	advertisementMyads: state.advertisement.advertisementMyads,
+	advertisementMyadsFetchStatus: state.advertisement.advertisementMyadsFetchStatus
 });
 
 const mapDispatchToProps = {
-	advertisementsListFetch
+	advertisementFetchMyads
 };
 
 export default withCookies(connect(mapStateToProps, mapDispatchToProps)(MyAdvertisement));
