@@ -8,7 +8,7 @@ import {
 	fetchSections,
 	registerUser
 } from "../../actions/portal";
-import {API_SUCCESS} from "../../constants/common";
+import {API_ERROR, API_SUCCESS} from "../../constants/common";
 
 
 class Register extends Component {
@@ -34,7 +34,7 @@ class Register extends Component {
 	};
 
 	render() {
-		const { classes, sections, cookies } = this.props;
+		const { classes, sections, cookies, registerUserStatus } = this.props;
 		const userCookie = cookies.get('user');
 		const segmentSchema = yup.object().shape({
 			firstname: yup.string().required('First name is required'),
@@ -56,7 +56,7 @@ class Register extends Component {
 			<div className="bg-gradient-primary container-with-no-padding">
 				<div className="container">
 					<div className="row justify-content-center">
-						<div className="col-xl-10 col-lg-12 col-md-9">
+						<div className="col-xl-11 col-lg-12 col-md-11">
 							<div className="card o-hidden border-0 shadow-lg my-5">
 								<div className="card-body p-0">
 									<div className="row">
@@ -66,6 +66,17 @@ class Register extends Component {
 												<div className="text-center">
 													<h1 className="h4 text-gray-900 mb-4">Create an Account!</h1>
 												</div>
+												{
+													registerUserStatus === API_ERROR && (
+														<div className="row justify-content-center">
+															<div className="alert alert-danger" role="alert">
+																Registration is not successful!
+																<br />
+																Please try again or contact support!
+															</div>
+														</div>
+													)
+												}
 												<Formik
 													initialValues={{ firstname: '', lastname:'', studentClass:'', section:'', email: '', phone:'', password: '', confirmpassword: '' }}
 													validationSchema={segmentSchema}

@@ -6,7 +6,7 @@ import md5 from 'md5';
 import {Link , Redirect} from "react-router-dom";
 import "../../assets/styles/common.css";
 import { fetchUser } from '../../actions/portal';
-import {API_SUCCESS} from "../../constants/common";
+import {API_ERROR, API_SUCCESS} from "../../constants/common";
 
 
 class Login extends Component {
@@ -39,7 +39,7 @@ class Login extends Component {
 			<div className="bg-gradient-primary container-with-no-padding">
 				<div className="container">
 					<div className="row justify-content-center">
-						<div className="col-xl-10 col-lg-12 col-md-9">
+						<div className="col-xl-11 col-lg-12 col-md-11">
 							<div className="card o-hidden border-0 shadow-lg my-5">
 								<div className="card-body p-0">
 									<div className="row">
@@ -49,6 +49,17 @@ class Login extends Component {
 												<div className="text-center">
 													<h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
 												</div>
+												{
+													userFetchStatus === API_ERROR && (
+														<div className="row justify-content-center">
+															<div className="alert alert-danger" role="alert">
+																Phone and Password don't match. Please try again! <br />
+																Or <br />
+																Register if you dont have account!
+															</div>
+														</div>
+													)
+												}
 												<Formik
 													initialValues={{ phone: '', password: '' }}
 													validationSchema={segmentSchema}
@@ -78,16 +89,6 @@ class Login extends Component {
 																       value={values.password}
 																/>
 																{errors.password && touched.password && <div className="invalid-feedback">{errors.password}</div>}
-															</div>
-															<div className="form-group">
-																<div className="custom-control custom-checkbox small">
-																	<input type="checkbox"
-																	       className="custom-control-input"
-																	       id="customCheck"
-																	/>
-																	<label className="custom-control-label"
-																	       htmlFor="customCheck">Remember Me</label>
-																</div>
 															</div>
 															<button
 																type="submit"

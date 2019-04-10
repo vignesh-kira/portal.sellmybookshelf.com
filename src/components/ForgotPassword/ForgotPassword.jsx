@@ -7,7 +7,7 @@ class ForgotPassword extends Component {
 			<div className="bg-gradient-primary container-with-no-padding">
 				<div className="container">
 					<div className="row justify-content-center">
-						<div className="col-xl-10 col-lg-12 col-md-9">
+						<div className="col-xl-11 col-lg-12 col-md-11">
 							<div className="card o-hidden border-0 shadow-lg my-5">
 								<div className="card-body p-0">
 									<div className="row">
