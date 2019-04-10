@@ -1,17 +1,20 @@
 import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons'
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+import StarRatings from 'react-star-ratings';
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'
 import Footer  from '../../Shared/Footer'
 import {withCookies} from "react-cookie";
-import {connect} from "react-redux";
+
 import {advertisementView} from "../../../actions/portal";
 import {API_SUCCESS} from "../../../constants/common";
 import "../../../styled/common.css";
 import book from "../../../images/book.png";
-import {Link} from "react-router-dom";
+
 
 class ViewAdvertisement extends Component {
 	componentDidMount() {
@@ -48,42 +51,114 @@ class ViewAdvertisement extends Component {
 							     style={{
 								     border: '1px solid rgba(0, 0, 0, 0.125)',
 								     borderRadius: '5px',
+								     backgroundColor: 'white',
 								     padding: '30px'
 							     }}>
-
+								<div className="row">
+									<h2>
+										Title: Maths Book is ready to be sold
+									</h2>
+								</div>
+								<hr />
 								{/* Books Count Section */}
-								<div className="row"
-								     style={{
-									     display: 'flex',
-									     flexDirection: 'row',
-									     justifyContent: 'space-between'
-								     }}>
-									<img
-										src={book} width='100' height='100'
-										style={{marginTop: '-10px'}}
-									/>
-									<div>
-										<h5 className="card-title">&#8377; 300</h5>
-										<p className="card-text">
-											10th Class
-											<br />
-											Maths Book
-											<br />
-											<span className="badge badge-pill badge-primary">Available</span>
+								<div className="row col-md-12  col-sm-12">
+									<div className="col-md-2 col-sm-2 vr">
+										<img
+
+											src={book} width='150' height='150'
+											style={{marginTop: '-10px', marginRight: '20px'}}
+										/>
+									</div>
+									<div className="col-md-4 col-sm-4">
+										<p className="card-text advertisementBasicInfo">
+											<table>
+												<tbody>
+												<tr>
+													<th>Price:</th>
+													<th>&#8377; 300</th>
+												</tr>
+												<tr>
+													<th>Class:</th>
+													<th>10th</th>
+												</tr>
+												<tr>
+													<th>Subject:</th>
+													<th>Maths</th>
+												</tr>
+												<tr>
+													<th>Author:</th>
+													<th>RK Kesri</th>
+												</tr>
+												<tr>
+													<th>Status:</th>
+													<th>
+														<span className="badge badge-pill badge-primary">Available</span>
+													</th>
+												</tr>
+												</tbody>
+											</table>
 										</p>
 									</div>
-									<div>
+									<div className="col-md-6 col-sm-6 centerAlign">
 										<button
-											style={{alignSelf: 'center'}}
 											className="btn btn-primary btn-lg"
 										>
 
-											View
+											Reserve
 										</button>
 									</div>
 								</div>
+								<hr />
+								<div className="row col-md-12  col-sm-12">
+									<div className="col-md-8 col-sm-8">
+										<h5><b>Description:</b></h5>
+										<p className="text-justify">
+											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
+											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
+											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
+											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
+											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
+											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
+											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
+											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
+										</p>
+									</div>
+									<div className="col-md-4 col-sm-4 advertisementExtraInfo">
+										<table>
+											<tbody>
+											<tr>
+												<th>Date:</th>
+												<th>10th July 2018</th>
+											</tr>
+											<tr>
+												<th>Condition Rating:</th>
+												<th>
+													<StarRatings
+														rating={3}
+														starRatedColor="#007bff"
+														starDimension="20px"
+														starSpacing="2px"
+													/>
+												</th>
+											</tr>
+											<tr>
+												<th>Condition Text:</th>
+												<th>Good, Not Bad, Torn</th>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div className="row centerAlign">
+									<button
+										className="btn btn-primary btn-xlarge"
+									>
 
+										Reserve
+									</button>
+								</div>
 							</div>
+
 						</div>
 						{/* /.container-fluid */}
 
