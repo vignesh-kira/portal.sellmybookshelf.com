@@ -32,7 +32,7 @@ class Login extends Component {
 			return (<Redirect to={{pathname: "/dashboard"}}/>)
 		}
 		const segmentSchema = yup.object().shape({
-			email: yup.string().email('Invalid email address').required('Email is required'),
+			phone: yup.string().length(10, 'Phone numbers should be 10 digits').required('Number is required'),
 			password: yup.string().required('Password is required')
 		});
 		return (
@@ -50,23 +50,23 @@ class Login extends Component {
 													<h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
 												</div>
 												<Formik
-													initialValues={{ email: '', password: '' }}
+													initialValues={{ phone: '', password: '' }}
 													validationSchema={segmentSchema}
 													onSubmit={this.handleFormSubmit}
 												>
 													{({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (
 														<form className="user" onSubmit={handleSubmit} >
 															<div className="form-group text-left">
-																<label>Email:</label>
-																<input type="email"
-																       className={`form-control ${errors.email && touched.email && 'is-invalid'}`}
-																       name="email"
-																       id="email"
+																<label>Phone:</label>
+																<input type="number"
+																       className={`form-control ${errors.phone && touched.phone && 'is-invalid'}`}
+																       name="phone"
+																       id="phone"
 																       onChange={handleChange}
 																       onBlur={handleBlur}
-																       value={values.email}
+																       value={values.phone}
 																/>
-																{errors.email && touched.email && <div className="invalid-feedback">{errors.email}</div>}
+																{errors.phone && touched.phone && <div className="invalid-feedback">{errors.phone}</div>}
 															</div>
 															<div className="form-group text-left">
 																<label>Password:</label>

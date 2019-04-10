@@ -42,7 +42,7 @@ class Register extends Component {
 			studentClass: yup.string().required('Class is required'),
 			section: yup.string().required('Section is required'),
 			email: yup.string().email('Invalid email address'),
-			phone: yup.number().required('Phone is required'),
+			phone: yup.string().length(10, 'Phone numbers should be 10 digits').required('Phone number is required'),
 			password: yup.string().required('Password is required'),
 			confirmpassword: yup.string().required('Confirm Password is required').test('passwords-match', 'Passwords do not match', function(value) {
 				return this.parent.password === value;
@@ -154,7 +154,7 @@ class Register extends Component {
 																</div>
 																<div className="col-sm-6 text-left">
 																	<label>Phone:</label>
-																	<input type="phone"
+																	<input type="number"
 																	       className={`form-control ${errors.phone && touched.phone && 'is-invalid'}`}
 																	       id="phone"
 																	       name="phone"
