@@ -4,6 +4,8 @@ import { faBook } from '@fortawesome/free-solid-svg-icons'
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import StarRatings from 'react-star-ratings';
+import Moment from 'react-moment';
+
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'
@@ -22,10 +24,13 @@ class ViewAdvertisement extends Component {
 
 		this.props.advertisementView({id});
 	}
+	de
 	render() {
 		const { advertisementViewStatus, advertisement } = this.props;
+		const { id, advertisementStatus, subject, book_author, book_final_price, book_title, condition_rating, condition_text, description, createdAt } = advertisement;
 
 		return (
+			Object.keys(advertisement).length > 0 &&
 			<div id="wrapper">
 				{/* Sidebar */}
 				<SideNav/>
@@ -56,7 +61,7 @@ class ViewAdvertisement extends Component {
 							     }}>
 								<div className="row">
 									<h2>
-										Title: Maths Book is ready to be sold
+										Title: {book_title}
 									</h2>
 								</div>
 								<hr />
@@ -75,24 +80,24 @@ class ViewAdvertisement extends Component {
 												<tbody>
 												<tr>
 													<th>Price:</th>
-													<th>&#8377; 300</th>
+													<th>&#8377; {book_final_price}</th>
 												</tr>
 												<tr>
 													<th>Class:</th>
-													<th>10th</th>
+													<th>{advertisement.class.name}</th>
 												</tr>
 												<tr>
 													<th>Subject:</th>
-													<th>Maths</th>
+													<th>{subject.name}</th>
 												</tr>
 												<tr>
 													<th>Author:</th>
-													<th>RK Kesri</th>
+													<th>{book_author}</th>
 												</tr>
 												<tr>
 													<th>Status:</th>
 													<th>
-														<span className="badge badge-pill badge-primary">Available</span>
+														<span className="badge badge-pill badge-primary">{advertisementStatus.name}</span>
 													</th>
 												</tr>
 												</tbody>
@@ -101,40 +106,38 @@ class ViewAdvertisement extends Component {
 									</div>
 									<div className="col-md-6 col-sm-6 centerAlign">
 										<button
-											className="btn btn-primary btn-lg"
+											className="btn btn-primary btn-xlarge"
 										>
-
 											Reserve
 										</button>
 									</div>
 								</div>
 								<hr />
 								<div className="row col-md-12  col-sm-12">
-									<div className="col-md-8 col-sm-8">
+									<div className="col-md-7 col-sm-7">
 										<h5><b>Description:</b></h5>
 										<p className="text-justify">
-											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
-											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
-											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
-											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
-											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
-											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
-											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
-											SOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiongSOmething soemthing something somethiong
+											{description}
 										</p>
 									</div>
-									<div className="col-md-4 col-sm-4 advertisementExtraInfo">
+									<div className="col-md-5 col-sm-5 advertisementExtraInfo">
 										<table>
 											<tbody>
 											<tr>
 												<th>Date:</th>
-												<th>10th July 2018</th>
+												<th>
+													<Moment
+														format="LLLL"
+														>
+														{createdAt}
+													</Moment>
+												</th>
 											</tr>
 											<tr>
 												<th>Condition Rating:</th>
 												<th>
 													<StarRatings
-														rating={3}
+														rating={parseInt(condition_rating)}
 														starRatedColor="#007bff"
 														starDimension="20px"
 														starSpacing="2px"
@@ -143,19 +146,11 @@ class ViewAdvertisement extends Component {
 											</tr>
 											<tr>
 												<th>Condition Text:</th>
-												<th>Good, Not Bad, Torn</th>
+												<th>{condition_text}</th>
 											</tr>
 											</tbody>
 										</table>
 									</div>
-								</div>
-								<div className="row centerAlign">
-									<button
-										className="btn btn-primary btn-xlarge"
-									>
-
-										Reserve
-									</button>
 								</div>
 							</div>
 

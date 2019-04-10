@@ -52,7 +52,7 @@ class EditAdvertisement extends Component {
 			book_final_price
 		}= advertisement;
 		const segmentSchema = yup.object().shape({
-			title: yup.string().required('Adv. Title is required'),
+			title: yup.string().max(50, 'Maximum is 50 characters').required('Title is required'),
 			description: yup.string().required('Description is required'),
 			studentClass: yup.string().required('Class is required'),
 			subject_id: yup.string().required('Subject is required'),

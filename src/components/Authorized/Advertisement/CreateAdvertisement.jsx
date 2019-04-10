@@ -32,7 +32,7 @@ class CreateAdvertisement extends Component {
 	render() {
 		const { classes, subjects } = this.props;
 		const segmentSchema = yup.object().shape({
-			title: yup.string().required('Adv. Title is required'),
+			title: yup.string().max(50, 'Maximum is 50 characters').required('Adv. Title is required'),
 			description: yup.string().required('Description is required'),
 			studentClass: yup.string().required('Class is required'),
 			subject_id: yup.string().required('Subject is required'),
