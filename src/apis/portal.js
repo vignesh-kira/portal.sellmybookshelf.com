@@ -71,8 +71,8 @@ export function advertisementUpdate({payload : {entity, id}}) {
 	});
 }
 
-export function advertisementsListFetch() {
-	return fetchJson(`${BASE_URL}/advertisements`, {
+export function advertisementsListFetch({payload: { studentClass, subject_id, page }}) {
+		return fetchJson(`${BASE_URL}/advertisements?studentClass=${studentClass}&subject=${subject_id}&page=${page}`, {
 		method: 'GET'
 	});
 }

@@ -1,21 +1,33 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import {withCookies} from "react-cookie";
+import {Formik} from "formik";
+import * as yup from "yup";
+
 import {connect} from "react-redux";
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'
 import Footer  from '../../Shared/Footer'
-import {advertisementsListFetch} from "../../../actions/portal";
+import {fetchClasses, fetchSubjects, advertisementsListFetch} from "../../../actions/portal";
 import book from "../../../images/book.png";
 
 class ListAdvertisement extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			studentClass: '',
+			subject_id: ''
+		}
+	}
+
 	componentDidMount() {
-		this.props.advertisementsListFetch();
+		this.props.fetchClasses();
+		this.props.fetchSubjects();
+		this.props.advertisementsListFetch({studentClass: '', subject_id: '', page: 0});
 	}
 
 	advertisementItemUI = (advertisement) => {
-		// {class,subject,advertisementStatus,book_final_price}
 
 		return (
 			<div className="row advertisementWrapper">
@@ -44,8 +56,8 @@ class ListAdvertisement extends Component {
 							</div>
 						</div>
 						<Link to={`/advertisement/view/${advertisement.id}`}
-							style={{alignSelf: 'center'}}
-							className="btn btn-primary btn-lg"
+						      style={{alignSelf: 'center'}}
+						      className="btn btn-primary btn-lg"
 						>
 							View
 						</Link>
@@ -56,14 +68,25 @@ class ListAdvertisement extends Component {
 	};
 
 	populateAdvertisementItems = () =>{
-		const {advertisementsList} = this.props;
-		return advertisementsList.map( advertisement =>{
+		const {advertisementsList: {rows = []}} = this.props;
+		return rows.map( advertisement =>{
 			return this.advertisementItemUI(advertisement);
 		});
 	};
 
+	handleFormSubmit = ({ studentClass, subject_id}) => {
+		const page = 0;
+		this.props.advertisementsListFetch({studentClass, subject_id, page});
+	};
+
 	render() {
-		const { advertisementsListFetchStatus, advertisementsList } = this.props;
+		const { advertisementsList: { count }, classes, subjects } = this.props;
+		const { studentClass, subject_id } = this.state;
+
+		const segmentSchema = yup.object().shape({
+			studentClass: yup.string(),
+			subject_id: yup.string(),
+		});
 
 		return (
 			<div id="wrapper">
@@ -93,9 +116,81 @@ class ListAdvertisement extends Component {
 								     borderRadius: '5px',
 								     padding: '30px'
 							     }}>
+
+								<div className="row">
+									<Formik
+										initialValues={{
+											studentClass,
+											subject_id
+										}}
+										validationSchema={segmentSchema}
+										onSubmit={this.handleFormSubmit}
+									>
+										{({errors, handleBlur, handleChange, handleSubmit, touched, values}) => (
+											<form onSubmit={handleSubmit} className="col-md-12 col-sm-12">
+												<div className="row col-md-12" >
+													<label><b>Filter:</b></label>
+												</div>
+												<div className="form-group row">
+													<div className="col-sm-4 col-md-4 text-left">
+														<label>Class:</label>
+														<select
+															className={`form-control ${errors.studentClass && touched.studentClass && 'is-invalid'}`}
+															id="studentClass"
+															name="studentClass"
+															onChange={handleChange}
+															onBlur={handleBlur}
+															value={values.studentClass}
+														>
+															<option value="">All</option>
+															{classes.map(classInfo => (
+																<option key={classInfo.id} value={classInfo.id}>
+																	{classInfo.name}
+																</option>
+															))}
+														</select>
+														{errors.studentClass && touched.studentClass && <div
+															className="invalid-feedback">{errors.studentClass}</div>}
+													</div>
+													<div className="col-sm-4 col-md-4 text-left">
+														<label>Subject:</label>
+														<select
+															className={`form-control ${errors.subject_id && touched.subject_id && 'is-invalid'}`}
+															id="subject_id"
+															name="subject_id"
+															onChange={handleChange}
+															onBlur={handleBlur}
+															value={values.subject_id}
+														>
+															<option value="">All</option>
+															{subjects.map(subject => (
+																<option key={subject.id} value={subject.id}>
+																	{subject.name}
+																</option>
+															))}
+														</select>
+														{errors.subject_id && touched.subject_id && <div
+															className="invalid-feedback">{errors.subject_id}</div>}
+													</div>
+													<div className="col-sm-4 col-md-4" style={{display: 'flex'}}>
+														<button
+															type="submit"
+															className="btn btn-primary btn-md"
+															style={{alignSelf: 'flex-end'}}
+															onClick={handleSubmit}
+														>
+															Apply
+														</button>
+													</div>
+												</div>
+											</form>
+										)}
+									</Formik>
+								</div>
+								<hr />
 								{/* Books Count Section */}
 								<div className="row">
-									<h6 className="text-left">{advertisementsList.length} books are listed.</h6>
+									<h6 className="text-left">{count} books are listed.</h6>
 								</div>
 
 								{/* Books Advertisement Section */}
@@ -125,6 +220,8 @@ class ListAdvertisement extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
+	classes: state.common.classes,
+	subjects: state.common.subjects,
 	user: state.common.user,
 	cookies: ownProps.cookies,
 	advertisementsList: state.advertisement.advertisementsList,
@@ -132,7 +229,9 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = {
-	advertisementsListFetch
+	advertisementsListFetch,
+	fetchClasses,
+	fetchSubjects,
 };
 
 export default withCookies(connect(mapStateToProps, mapDispatchToProps)(ListAdvertisement));
