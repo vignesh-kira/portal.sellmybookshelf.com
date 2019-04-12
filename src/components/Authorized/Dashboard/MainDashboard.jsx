@@ -41,7 +41,7 @@ const MainDashboard = (props) => (
 											<div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												BOOKS BOUGHT
 											</div>
-											<div className="h5 mb-0 font-weight-bold text-gray-800">5</div>
+											<div className="h5 mb-0 font-weight-bold text-gray-800">0</div>
 										</div>
 										<div className="col-auto">
 											<i className="fa fa-calendar fa-2x text-gray-300"></i>
@@ -60,7 +60,7 @@ const MainDashboard = (props) => (
 											<div className="text-xs font-weight-bold text-success text-uppercase mb-1">
 												BOOKS SOLD
 											</div>
-											<div className="h5 mb-0 font-weight-bold text-gray-800">5</div>
+											<div className="h5 mb-0 font-weight-bold text-gray-800">0</div>
 										</div>
 										<div className="col-auto">
 											<i className="fa fa-comments fa-2x text-gray-300"></i>
@@ -79,7 +79,7 @@ const MainDashboard = (props) => (
 												className="text-xs font-weight-bold text-info text-uppercase mb-1">
 												My Advertisements
 											</div>
-											<div className="h5 mb-0 font-weight-bold text-gray-800">5</div>
+											<div className="h5 mb-0 font-weight-bold text-gray-800">0</div>
 										</div>
 										<div className="col-auto">
 											<i className="fa fa-comments fa-2x text-gray-300"></i>
@@ -98,7 +98,7 @@ const MainDashboard = (props) => (
 											<div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
 												Total Earnings
 											</div>
-											<div className="h5 mb-0 font-weight-bold text-gray-800">&#8377; 100</div>
+											<div className="h5 mb-0 font-weight-bold text-gray-800">&#8377; 0</div>
 										</div>
 										<div className="col-auto">
 											<i className="fa fa-comments fa-2x text-gray-300"></i>

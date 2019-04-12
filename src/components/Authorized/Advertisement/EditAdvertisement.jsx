@@ -38,7 +38,7 @@ class EditAdvertisement extends Component {
 	};
 
 	render() {
-		const { classes, subjects, advertisement, advertisementFetchStatus, advertisementUpdateStatus } = this.props;
+		const { classes, subjects, advertisement, advertisementFetchStatus } = this.props;
 		const {
 			title,
 			description,
@@ -163,22 +163,6 @@ class EditAdvertisement extends Component {
 															</div>
 														</div>
 														<div className="form-group row">
-															<div className="col-sm-12 text-left">
-																<label>Description:</label>
-																<textarea
-																	className={`form-control ${errors.description && touched.description && 'is-invalid'}`}
-																	id="description"
-																	name="description"
-																	onChange={handleChange}
-																	onBlur={handleBlur}
-																	value={values.description}
-																>
-														</textarea>
-																{errors.description && touched.description && <div
-																	className="invalid-feedback">{errors.description}</div>}
-															</div>
-														</div>
-														<div className="form-group row">
 															<div className="col-sm-6 text-left">
 																<label>Book Title:</label>
 																<input type="text"
@@ -204,6 +188,22 @@ class EditAdvertisement extends Component {
 																/>
 																{errors.book_author && touched.book_author && <div
 																	className="invalid-feedback">{errors.book_author}</div>}
+															</div>
+														</div>
+														<div className="form-group row">
+															<div className="col-sm-12 text-left">
+																<label>Description:</label>
+																<textarea
+																	className={`form-control ${errors.description && touched.description && 'is-invalid'}`}
+																	id="description"
+																	name="description"
+																	onChange={handleChange}
+																	onBlur={handleBlur}
+																	value={values.description}
+																>
+														</textarea>
+																{errors.description && touched.description && <div
+																	className="invalid-feedback">{errors.description}</div>}
 															</div>
 														</div>
 														<div className="form-group row">
