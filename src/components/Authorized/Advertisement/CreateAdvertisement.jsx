@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import * as yup from "yup";
 import {connect} from "react-redux";
 import {withCookies} from "react-cookie";
-import Rating from "react-rating";
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'

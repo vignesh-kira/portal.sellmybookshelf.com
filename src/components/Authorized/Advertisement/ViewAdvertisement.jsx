@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook } from '@fortawesome/free-solid-svg-icons'
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 import StarRatings from 'react-star-ratings';
 import Moment from 'react-moment';
 
@@ -13,8 +10,7 @@ import Footer  from '../../Shared/Footer'
 import {withCookies} from "react-cookie";
 
 import {advertisementView} from "../../../actions/portal";
-import {API_SUCCESS} from "../../../constants/common";
-import "../../../styled/common.css";
+import "../../../assets/styles/common.css";
 import book from "../../../images/book.png";
 
 
@@ -24,10 +20,9 @@ class ViewAdvertisement extends Component {
 
 		this.props.advertisementView({id});
 	}
-	de
 	render() {
-		const { advertisementViewStatus, advertisement } = this.props;
-		const { id, advertisementStatus, subject, book_author, book_final_price, book_title, condition_rating, condition_text, description, createdAt } = advertisement;
+		const { advertisement } = this.props;
+		const { advertisementStatus, subject, book_author, book_final_price, book_title, condition_rating, condition_text, description, createdAt } = advertisement;
 
 		return (
 			Object.keys(advertisement).length > 0 &&

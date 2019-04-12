@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import {withCookies} from "react-cookie";
 import {Formik} from "formik";
 import * as yup from "yup";
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
 
 import {connect} from "react-redux";
 import SideNav  from '../common/SideNav'
@@ -11,13 +13,16 @@ import PageTitle  from '../common/PageTitle'
 import Footer  from '../../Shared/Footer'
 import {fetchClasses, fetchSubjects, advertisementsListFetch} from "../../../actions/portal";
 import book from "../../../images/book.png";
+import "../../../assets/styles/pagination-overwrite.css";
+
 
 class ListAdvertisement extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			studentClass: '',
-			subject_id: ''
+			subject_id: '',
+			current: 3
 		}
 	}
 
@@ -78,6 +83,13 @@ class ListAdvertisement extends Component {
 		const page = 0;
 		this.props.advertisementsListFetch({studentClass, subject_id, page});
 	};
+
+	onChange = (page) => {
+		console.log(page);
+		this.setState({
+			current: page,
+		});
+	}
 
 	render() {
 		const { advertisementsList: { count }, classes, subjects } = this.props;
@@ -197,8 +209,8 @@ class ListAdvertisement extends Component {
 								{this.populateAdvertisementItems()}
 
 								{/* Pagination Section */}
-								<div className="row">
-
+								<div className="row col-md-12 text-center">
+									<Pagination className="paginationComponent" onChange={this.onChange} current={this.state.current} pageSize={20} total={100} />
 								</div>
 							</div>
 						</div>

@@ -38,6 +38,7 @@
     "postcss-loader": "^1.2.2",
     "prop-types": "^15.7.2",
     "query-string": "^6.2.0",
+    "rc-pagination": "^1.17.13",
     "react": "^16.8.4",
     "react-cookie": "^3.0.8",
     "react-dom": "^16.8.4",
