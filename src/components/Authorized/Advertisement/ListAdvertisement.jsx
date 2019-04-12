@@ -22,14 +22,22 @@ class ListAdvertisement extends Component {
 		this.state = {
 			studentClass: '',
 			subject_id: '',
-			current: 3
+			page: 0
 		}
 	}
 
 	componentDidMount() {
+		const { page } = this.state;
 		this.props.fetchClasses();
 		this.props.fetchSubjects();
-		this.props.advertisementsListFetch({studentClass: '', subject_id: '', page: 0});
+		this.props.advertisementsListFetch({studentClass: '', subject_id: '', page});
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		const { page } = this.state;
+		if(prevState.page !== page){
+			this.handleFormSubmit(this.state);
+		}
 	}
 
 	advertisementItemUI = (advertisement) => {
@@ -79,21 +87,23 @@ class ListAdvertisement extends Component {
 		});
 	};
 
+	onChangePage = (page) => {
+		page--;
+		this.setState({
+			page
+		});
+	};
+
 	handleFormSubmit = ({ studentClass, subject_id}) => {
-		const page = 0;
+		const { page } = this.state;
 		this.props.advertisementsListFetch({studentClass, subject_id, page});
 	};
 
-	onChange = (page) => {
-		console.log(page);
-		this.setState({
-			current: page,
-		});
-	}
-
 	render() {
 		const { advertisementsList: { count }, classes, subjects } = this.props;
-		const { studentClass, subject_id } = this.state;
+		const { studentClass, subject_id, page } = this.state;
+		const startLimit = page*10 + 1;
+		const endLimit = (page*10 + 10) > count ? count : (page*10 + 10);
 
 		const segmentSchema = yup.object().shape({
 			studentClass: yup.string(),
@@ -202,16 +212,27 @@ class ListAdvertisement extends Component {
 								<hr />
 								{/* Books Count Section */}
 								<div className="row">
-									<h6 className="text-left">{count} books are listed.</h6>
+									<h6 className="text-left">{startLimit} - {endLimit} of {count} books are listed.</h6>
 								</div>
 
 								{/* Books Advertisement Section */}
 								{this.populateAdvertisementItems()}
 
 								{/* Pagination Section */}
-								<div className="row col-md-12 text-center">
-									<Pagination className="paginationComponent" onChange={this.onChange} current={this.state.current} pageSize={20} total={100} />
-								</div>
+								{
+									count > 0 && (
+										<div className="row col-md-12 text-center">
+											<Pagination
+												className="paginationComponent"
+												onChange={(page)=> this.onChangePage(page)}
+												current={page + 1}
+												pageSize={10}
+												total={count}
+											/>
+										</div>
+									)
+								}
+
 							</div>
 						</div>
 						{/* /.container-fluid */}
