@@ -22,7 +22,9 @@ class ListAdvertisement extends Component {
 		this.state = {
 			studentClass: '',
 			subject_id: '',
-			page: 0
+			page: 0,
+			pageSize: 10,
+			limit: 10
 		}
 	}
 
@@ -34,9 +36,10 @@ class ListAdvertisement extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const { page } = this.state;
-		if(prevState.page !== page){
-			this.handleFormSubmit(this.state);
+		const { page, studentClass, subject_id } = this.state;
+
+		if(prevState.page !== page || prevState.studentClass !== studentClass || prevState.subject_id !== subject_id){
+			this.props.advertisementsListFetch({studentClass, subject_id, page});
 		}
 	}
 
@@ -95,15 +98,17 @@ class ListAdvertisement extends Component {
 	};
 
 	handleFormSubmit = ({ studentClass, subject_id}) => {
-		const { page } = this.state;
-		this.props.advertisementsListFetch({studentClass, subject_id, page});
+		this.setState({
+			studentClass,
+			subject_id
+		});
 	};
 
 	render() {
 		const { advertisementsList: { count }, classes, subjects } = this.props;
-		const { studentClass, subject_id, page } = this.state;
-		const startLimit = page*10 + 1;
-		const endLimit = (page*10 + 10) > count ? count : (page*10 + 10);
+		const { studentClass, subject_id, page, pageSize, limit } = this.state;
+		const startLimit = page*pageSize + 1;
+		const endLimit = (page*pageSize + limit) > count ? count : (page*pageSize + limit);
 
 		const segmentSchema = yup.object().shape({
 			studentClass: yup.string(),
@@ -212,7 +217,14 @@ class ListAdvertisement extends Component {
 								<hr />
 								{/* Books Count Section */}
 								<div className="row">
-									<h6 className="text-left">{startLimit} - {endLimit} of {count} books are listed.</h6>
+									<h6 className="text-left">
+										{
+											count > 0
+												? (`${startLimit} - ${endLimit} of ${count} `)
+												: `0 `
+										}
+										books are listed.
+									</h6>
 								</div>
 
 								{/* Books Advertisement Section */}
@@ -226,7 +238,7 @@ class ListAdvertisement extends Component {
 												className="paginationComponent"
 												onChange={(page)=> this.onChangePage(page)}
 												current={page + 1}
-												pageSize={10}
+												pageSize={pageSize}
 												total={count}
 											/>
 										</div>
