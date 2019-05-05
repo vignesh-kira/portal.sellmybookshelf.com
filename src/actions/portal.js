@@ -1,6 +1,8 @@
 import { createAction } from 'redux-actions';
 import * as actions from '../constants/action-types';
 
+export const globalAlertTurnOff = createAction(actions.GLOBAL_ALERT_TURN_OFF);
+
 export const fetchUser = createAction(actions.FETCH_USER);
 export const fetchUserSuccess = createAction(actions.FETCH_USER_SUCCESS);
 export const fetchUserError = createAction(actions.FETCH_USER_ERROR);
@@ -53,5 +55,6 @@ export const advertisementFetchMyads = createAction(actions.ADVERTISEMENT_FETCH_
 export const advertisementFetchMyadsSuccess = createAction(actions.ADVERTISEMENT_FETCH_MYADS_SUCCESS);
 export const advertisementFetchMyadsError = createAction(actions.ADVERTISEMENT_FETCH_MYADS_ERROR);
 
-export const globalAlertTurnOff = createAction(actions.GLOBAL_ALERT_TURN_OFF);
-
+export const advertisementDelete = createAction(actions.ADVERTISEMENT_DELETE);
+export const advertisementDeleteSuccess = createAction(actions.ADVERTISEMENT_DELETE_SUCCESS);
+export const advertisementDeleteError = createAction(actions.ADVERTISEMENT_DELETE_ERROR);

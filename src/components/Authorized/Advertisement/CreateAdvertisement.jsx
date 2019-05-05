@@ -64,7 +64,6 @@ class CreateAdvertisement extends Component {
 
 							{/* Page Heading */}
 							<PageTitle title="Create Advertisement"/>
-
 							{/* Content Row */}
 							<div className="row justify-content-center">
 								<div className="col-lg-8 col-md-8">

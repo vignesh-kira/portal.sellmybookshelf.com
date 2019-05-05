@@ -17,7 +17,11 @@ import {
 	ADVERTISEMENT_VIEW_ERROR,
 	ADVERTISEMENT_FETCH_MYADS,
 	ADVERTISEMENT_FETCH_MYADS_SUCCESS,
-	ADVERTISEMENT_FETCH_MYADS_ERROR, GLOBAL_ALERT_TURN_OFF
+	ADVERTISEMENT_FETCH_MYADS_ERROR,
+	GLOBAL_ALERT_TURN_OFF,
+	ADVERTISEMENT_DELETE,
+	ADVERTISEMENT_DELETE_SUCCESS,
+	ADVERTISEMENT_DELETE_ERROR
 } from '../constants/action-types';
 import {
 	API_SUCCESS,
@@ -108,7 +112,19 @@ export default handleActions({
 	[GLOBAL_ALERT_TURN_OFF]: (state) => ({
 		...state,
 		advertisementAlert: false
-	})
+	}),
+	[ADVERTISEMENT_DELETE]: (state) => ({
+		...state,
+		advertisementDeleteStatus: '',
+	}),
+	[ADVERTISEMENT_DELETE_SUCCESS]: (state) => ({
+		...state,
+		advertisementDeleteStatus: API_SUCCESS
+	}),
+	[ADVERTISEMENT_DELETE_ERROR]: (state) => ({
+		...state,
+		advertisementDeleteStatus: API_ERROR
+	}),
 }, {
 	advertisement: {},
 	advertisementCreateStatus: '',
@@ -119,5 +135,6 @@ export default handleActions({
 	advertisementViewStatus: '',
 	advertisementMyads: [],
 	advertisementMyadsFetchStatus: '',
-	advertisementAlert: false
+	advertisementAlert: false,
+	advertisementDeleteStatus: ''
 });

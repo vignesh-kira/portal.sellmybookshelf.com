@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import * as yup from "yup";
 import {connect} from "react-redux";
 import {withCookies} from "react-cookie";
+import { Alert } from 'reactstrap';
+
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
 import PageTitle  from '../common/PageTitle'
 import Footer  from '../../Shared/Footer'
 import {Formik} from "formik";
 import {fetchClasses, fetchSubjects, advertisementUpdate, advertisementFetch } from "../../../actions/portal";
-import AdvertisementUpdateModal from "../common/AdvertisementUpdateModal";
 import {API_ERROR, API_SUCCESS} from "../../../constants/common";
 
 class EditAdvertisement extends Component {
@@ -16,7 +17,11 @@ class EditAdvertisement extends Component {
 		super(props);
 		this.state = {
 			seller_final_price: '',
-			advertisement: {}
+			advertisement: {},
+			alertShow: false,
+			updateSuccessMessage: 'Advertisement has been updated successfully!',
+			updateErrorMessage: 'Advertisement was not updated. Please try again later!',
+			fetchErrorMessage: 'The Advertisement does not exist or you do not have permission to view the advertisement!'
 		};
 	}
 
@@ -31,14 +36,25 @@ class EditAdvertisement extends Component {
 		this.props.fetchSubjects();
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		const {advertisementUpdateStatus} = this.props;
+		if((prevProps.advertisementUpdateStatus !==  advertisementUpdateStatus) && (advertisementUpdateStatus === API_SUCCESS)){
+			this.toggleAlert();
+		}
+	}
+
 	handleFormSubmit = (entity) => {
 		const {advertisementUpdate, match: { params : {id} }} = this.props;
 
 		advertisementUpdate({entity, id});
 	};
 
+	toggleAlert = () => {
+		this.setState(prevState => ({ alertShow: !prevState.alertShow }));
+	};
+
 	render() {
-		const { classes, subjects, advertisement, advertisementFetchStatus } = this.props;
+		const { classes, subjects, advertisement, advertisementFetchStatus, advertisementUpdateStatus } = this.props;
 		const {
 			title,
 			description,
@@ -50,7 +66,13 @@ class EditAdvertisement extends Component {
 			condition_rating,
 			book_seller_price,
 			book_final_price
-		}= advertisement;
+		} = advertisement;
+		const {
+			alertShow,
+			updateSuccessMessage,
+			updateErrorMessage,
+			fetchErrorMessage
+		} = this.state;
 		const segmentSchema = yup.object().shape({
 			title: yup.string().max(50, 'Maximum is 50 characters').required('Title is required'),
 			description: yup.string().required('Description is required'),
@@ -84,6 +106,19 @@ class EditAdvertisement extends Component {
 						<div className="container-fluid">
 							{/* Page Heading */}
 							<PageTitle title="Edit Advertisement"/>
+
+							{/* Alert Update */}
+							<Alert color="success" isOpen={alertShow && advertisementUpdateStatus === API_SUCCESS} toggle={this.toggleAlert}>
+								<strong> {updateSuccessMessage} </strong>
+							</Alert>
+							<Alert color="danger" isOpen={alertShow && advertisementUpdateStatus === API_ERROR} toggle={this.toggleAlert}>
+								<strong> {updateErrorMessage} </strong>
+							</Alert>
+
+							{/* Alert Fetch*/}
+							<Alert color="danger" isOpen={advertisementFetchStatus === API_ERROR}>
+								<strong> {fetchErrorMessage} </strong>
+							</Alert>
 							{
 								advertisementFetchStatus === API_SUCCESS && (
 									/* Content Row */
@@ -284,15 +319,6 @@ class EditAdvertisement extends Component {
 									</div>
 								)
 							}
-							{
-								advertisementFetchStatus === API_ERROR && (
-									<div className="row justify-content-center">
-										<div className="alert alert-danger" role="alert">
-											The Advertisement does not exist or you do not have permission to view the advertisement!
-										</div>
-									</div>
-								)
-							}
 						</div>
 						{/* /.container-fluid */}
 
@@ -306,7 +332,7 @@ class EditAdvertisement extends Component {
 				</div>
 				{/* End of Content Wrapper */}
 
-				<AdvertisementUpdateModal />
+				{/*<AdvertisementUpdateModal />*/}
 			</div>
 		);
 	}

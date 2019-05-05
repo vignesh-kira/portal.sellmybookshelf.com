@@ -71,6 +71,12 @@ export function advertisementUpdate({payload : {entity, id}}) {
 	});
 }
 
+export function advertisementDelete({payload : {id}}) {
+	return fetchJson(`${BASE_URL}/advertisements/${id}`, {
+		method: 'DELETE',
+	});
+}
+
 export function advertisementsListFetch({payload: { studentClass, subject_id, page }}) {
 		return fetchJson(`${BASE_URL}/advertisements?studentClass=${studentClass}&subject=${subject_id}&page=${page}`, {
 		method: 'GET'
