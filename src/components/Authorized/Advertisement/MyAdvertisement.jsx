@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {withCookies} from "react-cookie";
 import {connect} from "react-redux";
 import { Alert } from 'reactstrap';
+import Moment from 'react-moment';
 
 import SideNav  from '../common/SideNav'
 import TopNav  from '../common/TopNav'
@@ -86,19 +87,25 @@ class MyAdvertisement extends Component {
 							</p>
 						</div>
 					</div>
-					<div  style={{alignSelf: 'center'}}>
-						<Link to={`/advertisement/edit/${advertisement.id}`}
-						      className="btn btn-primary btn-lg"
-						>
-							Edit
-						</Link>
-						<button
-							className="btn btn-danger btn-lg myAdDelete"
-							onClick={() =>this.toggleDeleteModal(advertisement.id)}
-						>
-							Delete
-						</button>
+					<div>
+						<p className="text-right">
+							<Moment date={advertisement.createdAt} fromNow ago/>
+						</p>
+						<div  style={{alignSelf: 'center'}}>
+							<Link to={`/advertisement/edit/${advertisement.id}`}
+							      className="btn btn-primary btn-lg"
+							>
+								Edit
+							</Link>
+							<button
+								className="btn btn-danger btn-lg myAdDelete"
+								onClick={() =>this.toggleDeleteModal(advertisement.id)}
+							>
+								Delete
+							</button>
+						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>

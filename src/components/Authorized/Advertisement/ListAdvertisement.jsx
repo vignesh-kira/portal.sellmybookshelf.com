@@ -5,6 +5,7 @@ import {Formik} from "formik";
 import * as yup from "yup";
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
+import Moment from 'react-moment';
 
 import {connect} from "react-redux";
 import SideNav  from '../common/SideNav'
@@ -43,34 +44,36 @@ class ListAdvertisement extends Component {
 		}
 	}
 
-	advertisementItemUI = (advertisement) => {
-
-		return (
-			<div className="row advertisementWrapper">
-				<div className="card col-md-12 no-padding">
-					<div
-						className="card-body"
-						style={{
-							display: 'flex',
-							flexDirection: 'row',
-							justifyContent: 'space-between'
-						}}>
-						<div style={{display: 'flex'}}>
-							<img
-								src={book} width='100' height='100'
-								style={{marginTop: '-10px'}}
-							/>
-							<div>
-								<h5 className="card-title">&#8377; {advertisement.book_final_price}</h5>
-								<p className="card-text">
-									{advertisement.class.name} Class
-									<br />
-									{advertisement.subject.name} Book
-									<br />
-									<span className="badge badge-pill badge-primary">{advertisement.advertisementStatus.name}</span>
-								</p>
-							</div>
+	advertisementItemUI = (advertisement) => (
+		<div className="row advertisementWrapper">
+			<div className="card col-md-12 no-padding">
+				<div
+					className="card-body"
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						justifyContent: 'space-between'
+					}}>
+					<div style={{display: 'flex'}}>
+						<img
+							src={book} width='100' height='100'
+							style={{marginTop: '-10px'}}
+						/>
+						<div>
+							<h5 className="card-title">&#8377; {advertisement.book_final_price}</h5>
+							<p className="card-text">
+								{advertisement.class.name} Class
+								<br />
+								{advertisement.subject.name} Book
+								<br />
+								<span className="badge badge-pill badge-primary">{advertisement.advertisementStatus.name}</span>
+							</p>
 						</div>
+					</div>
+					<div>
+						<p className="text-right">
+							<Moment date={advertisement.createdAt} fromNow ago/>
+						</p>
 						<Link to={`/advertisement/view/${advertisement.id}`}
 						      style={{alignSelf: 'center'}}
 						      className="btn btn-primary btn-lg"
@@ -80,8 +83,8 @@ class ListAdvertisement extends Component {
 					</div>
 				</div>
 			</div>
-		)
-	};
+		</div>
+	);
 
 	populateAdvertisementItems = () =>{
 		const {advertisementsList: {rows = []}} = this.props;
