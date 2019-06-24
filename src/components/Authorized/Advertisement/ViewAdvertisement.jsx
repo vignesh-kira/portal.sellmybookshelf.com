@@ -21,8 +21,9 @@ class ViewAdvertisement extends Component {
 		this.props.advertisementView({id});
 	}
 	render() {
-		const { advertisement } = this.props;
-		const { advertisementStatus, subject, book_author, book_final_price, book_title, condition_rating, condition_text, description, createdAt } = advertisement;
+		const { advertisement, cookies } = this.props;
+		const { user_id, advertisementStatus, subject, book_author, book_final_price, book_title, condition_rating, condition_text, description, createdAt } = advertisement;
+		const { id : userId } = cookies.get('user');
 
 		return (
 			Object.keys(advertisement).length > 0 &&
@@ -100,11 +101,13 @@ class ViewAdvertisement extends Component {
 										</p>
 									</div>
 									<div className="col-md-6 col-sm-6 centerAlign">
-										<button
-											className="btn btn-primary btn-xlarge"
-										>
-											Reserve
-										</button>
+										{userId !== user_id  && (
+											<button
+												className="btn btn-primary btn-xlarge"
+											>
+												Reserve
+											</button>
+										)}
 									</div>
 								</div>
 								<hr />
